@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <h2><%= hotelInformation.tenKS %></h2>
+        <br><br><br>
+
+        <% for(let loaiPhong in roomsInformation) { %>
+            <p><%=roomsInformation[loaiPhong][0].tenLP%></p>
+            <% for(let luaChonPhong of roomsInformation[loaiPhong]) { %>
+                <p>Người lớn: <%=luaChonPhong.sucChuaNguoiLon%></p>
+                <p>Trẻ em: <%=luaChonPhong.sucChuaTreEm%></p>
+                <p>Giá gốc: <%=luaChonPhong.giaGoc.toFixed(0)%></p>
+                <p>Giá hiện tại: <%=(luaChonPhong.giaGoc - luaChonPhong.giaGoc*luaChonPhong.uuDai/100).toFixed(0)%></p>
+            <% } %>
+        <% } %>
+
+    </div>
+</body>
+</html>

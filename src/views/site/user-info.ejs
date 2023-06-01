@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Here We Go</title>
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/site/user-info.css">
+
+
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="main" style="margin-top: 60px">
+        <div class="df">
+            <div class="f2 info-links info-box" style="margin-bottom: 0px;">
+                <div style="font-size: 18px">
+                    <img src="/image/site/logo.png" alt="" style="height: 45px; margin-bottom: 8px;">
+                    <%= userInfo.user.username%>
+                </div>
+                <div class="btn hotel-history-btn">Lịch sử đặt phòng khách sạn</div>
+                <div class="btn tickets-history-btn mt-2">Lịch sử đặt vé máy bay</div>
+
+                <a href="/create-hotels/all-hotels" target="_blank" style="text-decoration: none; color: black">
+                    <div class="btn mt-2">Quản lý khách sạn của tôi</div>
+                </a>
+                <hr>
+                <!-- <br><br><br><br><br><br><br><br><br><br> -->
+                <a href="/signout" class="btn" style="color: #000; font-size: 16px">Đăng xuất</a>
+
+            </div>
+            <div class="info-box info-detail-container">
+                <div class="private-user-info-container info-box" style="min-width: 940px">
+                    <h5 class="text-center">Thông tin cá nhân</h5>
+                    <hr>
+                    <div class="df">
+                        <div class="f3">
+                            <span><b>Tên đầy đủ</b></span><br>
+                            <span><b>Email</b></span><br>
+                            <span><b>Số dư tài khoản</b></span><br>
+                        </div>
+                        <div class="f8">
+                            <span><b>
+                                    <%=userInfo.user.first_name + " " + userInfo.user.last_name%>
+                                </b></span><br>
+                            <span><b>
+                                    <%=userInfo.user.email%>
+                                </b></span><br>
+                            <span><b>
+                                    <%=userInfo.user.soDuTaiKhoan%> VND
+                                </b></span><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="tickets-booking-history-container">
+                    <% for(let item of ticketsBookedHistory) {%>
+                        <div class="info-box tickets-booking-history-item df">
+
+                            <div class="image-container f3">
+                                <img src="<%=item.linkAnh%>" style="width: 100%" alt="">
+
+                            </div>
+                            <div class="booking-info f8">
+                                <h5 class="hotel-name">
+                                    <%=item.tenTinh1%> -> <%=item.tenTinh2%>
+                                </h5>
+                                <span>
+                                    <%= item.tenSB1%> -> <%=item.tenSB2%>
+                                            <br>
+                                            <span class="airlines-name">
+                                                <%=item.tenHHK%>
+                                            </span>
+                                </span>
+
+                                <br><br>
+                                <h6>Thông tin</h6>
+
+                                <div class="df">
+                                    <p class="f4">
+                                        <%= item.soLuongDat%> vé dành cho
+                                            <% if(item.phanLoai==1) {%>
+                                                Người lớn
+                                                <% } %>
+                                                    <% if(item.phanLoai==2) {%>
+                                                        Trẻ em
+                                                        <% } %>
+                                                            <% if(item.phanLoai==3) {%>
+                                                                Trẻ sơ sinh
+                                                                <% } %>
+                                    </p>
+                                    <p class="f2 price"></p>
+                                </div>
+                                <div class="df">
+                                    <div class="f2">
+                                        <label for=""><b>Cất cánh</b></label><br>
+                                        <%= item.thoiGianCatCanh%>
+                                    </div>
+                                    <div class="f2">
+                                        <label for=""><b>Hạ cánh</b></label><br>
+                                        <%= item.thoiGianHaCanh%>
+
+                                    </div>
+                                    <div class="f2">
+                                        <label for=""><b>Thời gian đặt vé</b></label><br>
+                                        <%= item.thoiGianDat%>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="hotels-booking-history-container">
+
+                    <% for(let item of hotelBookedHistory) {%>
+                        <div class="info-box booking-history-item df">
+
+                            <div class="image-container f3">
+                                <img src="<%=item.linkAnh%>" style="width: 100%" alt="">
+
+                            </div>
+                            <div class="booking-info f8">
+                                <h5 class="hotel-name">
+                                    <%= item.tenKS%>
+                                </h5>
+                                <span>
+                                    <%=item.diaChiChiTiet%>
+                                </span>
+                                <br><br>
+                                <h6>Thông tin</h6>
+
+                                <div class="df">
+                                    <p class="f4">
+                                        <%=item.soLuongPhongDat%> x <%=item.tenLP%>
+                                    </p>
+                                    <p class="f2 price"></p>
+                                </div>
+                                <div class="df">
+                                    <div class="f2">
+                                        <label for=""><b>Check in </b></label><br>
+                                        <%=item.checkInDate%>
+                                    </div>
+                                    <div class="f2">
+                                        <label for=""><b>Check out </b></label><br>
+                                        <%=item.checkOutDate%>
+                                    </div>
+                                    <div class="f2">
+                                        <label for=""><b>Thời gian đặt phòng</b></label><br>
+                                        <%=item.thoiGianDat%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let hotelHistoryBtn = document.querySelector('.hotel-history-btn');
+        let ticketsHistoryBtn = document.querySelector('.tickets-history-btn');
+
+        let hotelBookedHistoryElements = document.querySelector('.hotels-booking-history-container');
+        let ticketsBookedHistoryElements = document.querySelector('.tickets-booking-history-container');
+
+        ticketsBookedHistoryElements.style.display = 'none';
+        hotelHistoryBtn.style.color = 'rgb(1, 148, 243)';
+        hotelHistoryBtn.style.borderLeft = '2px solid rgb(1, 148, 243)';
+
+        hotelHistoryBtn.onclick = function () {
+            hotelHistoryBtn.style.color = 'rgb(1, 148, 243)';
+            hotelHistoryBtn.style.borderLeft = '2px solid rgb(1, 148, 243)';
+            ticketsHistoryBtn.style.color = 'black';
+            ticketsHistoryBtn.style.borderLeft = 'none';
+            hotelBookedHistoryElements.style.display = 'block';
+            ticketsBookedHistoryElements.style.display = 'none';
+        }
+
+        ticketsHistoryBtn.onclick = function () {
+            ticketsHistoryBtn.style.color = 'rgb(1, 148, 243)';
+            ticketsHistoryBtn.style.borderLeft = '2px solid rgb(1, 148, 243)';
+            hotelHistoryBtn.style.color = 'black';
+            hotelHistoryBtn.style.borderLeft = 'none';
+            ticketsBookedHistoryElements.style.display = 'block';
+            hotelBookedHistoryElements.style.display = 'none';
+        }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

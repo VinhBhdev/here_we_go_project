@@ -1,0 +1,324 @@
+#main {
+    color: #5a5b5b;
+    /* font-family: mallory, Helvetica Neue, Helvetica, Arial, sans-serif; */
+    background-color: #f8f7f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+}
+
+.short-inf {
+    margin-top: 60px;
+    width: 100%;
+    height: 60px;
+    background-color: #20274d;
+
+}
+
+.short-inf .inf-form {
+    display: flex;
+    padding-top: 6px;
+    justify-content: space-evenly;
+}
+
+
+
+.date-inf {
+    display: flex;
+}
+
+.inf-form #place-search,
+.date-inf #date-from,
+.quantity #quantity__person,
+.date-inf #date-to {
+    padding-left: 12px;
+    height: 48px;
+    width: 260px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.date-inf #date-from,
+.date-inf #date-to {
+    width: 200px;
+}
+
+.quantity #quantity__person {
+    width: 360px;
+}
+
+#date-from {
+    margin-right: 10px;
+}
+
+.inf-form .search-btn {
+    height: 48px;
+    width: 150px;
+    border-radius: 5px;
+    background-color: rgb(83, 146, 249);
+    color: white;
+    font-size: 20px;
+}
+
+
+.hotel-body {
+    background-color: rgb(123, 165, 244);
+    display: flex;
+}
+
+.hotel-body .nav-bar {
+    width: 360px;
+    min-height: 200px;
+    background-color: #f8f7f9;
+    padding-top: 24px;
+    padding-left: 90px;
+    padding-right: 16px;
+}
+
+.nav-bar .search-btn {
+    height: 40px;
+}
+
+.search-btn #search-text {
+    width: 100%;
+    height: 100%;
+    padding-left: 38px;
+    font-size: 18px;
+    border-radius: 18px;
+    border: 1px solid rgb(83, 146, 249);
+}
+
+
+.filter {
+    margin-top: 24px;
+}
+
+.filter__price {
+    display: flex;
+    text-align: center;
+
+}
+
+.filter__price input {
+    margin-top: 4px;
+    width: 80%;
+    height: 25px;
+    padding-left: 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(83, 146, 249);
+}
+
+.filter .filter-box {
+    margin-top: 16px;
+    border-top: 1px dotted #000;
+}
+
+.filter__type p {
+    margin: 16px 0;
+}
+
+
+/* .filter__type input {
+
+} */
+
+.filter__type label {
+    margin-left: 8px;
+    margin-bottom: 16px;
+}
+
+.filter__rank p {
+    margin: 16px 0;
+}
+
+.filter__rank i {
+    color: goldenrod;
+}
+
+.hotel-chosen {
+    padding: 24px 32px;
+}
+
+.hotel-chosen .hotel-sort {
+    width: 824px;
+    height: 64px;
+    background-color: #fff;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+}
+
+.hotel-sort {
+    margin-bottom: 24px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12);
+}
+
+.hotel-sort p {
+    padding: 16px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+}
+
+.hotel-sort .hotel-sort__item {
+    padding: 16px;
+    text-align: center;
+}
+
+.hotel-sort__item+.hotel-sort__item {
+    border-left: 1px solid #ccc;
+}
+
+.hotel-sort .hotel-sort__item:hover {
+    color: rgb(83, 146, 249);
+    cursor: pointer;
+}
+
+
+
+.hotel-list .hotel-item {
+    width: 824px;
+    height: 280px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12);
+    display: flex;
+    margin-top: 28px;
+    border-radius: 15px;
+}
+
+.hotel-item .hotel-item__img {
+    width: 274px;
+}
+
+.main-img {
+    width: 100%;
+}
+
+.small-img {
+    display: inline-block;
+    width: 23.5%;
+}
+
+.hotel-item__desc {
+    width: 340px;
+    background-color: #fff;
+    padding: 8px 12px;
+}
+
+.hotel-name {
+    font-weight: 600;
+    color: rgb(36, 38, 44);
+    font-size: 20px;
+    font-family: mallory, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+}
+
+.hotel-rank {
+    color: goldenrod;
+    padding: 8px 0;
+}
+
+.hotel-utilities {
+    margin: 16px 0;
+    font-size: 12px;
+}
+
+.hotel-utilities li {
+    display: inline;
+    padding: 4px;
+    border: 1px solid #000;
+    max-width: 100px;
+}
+
+.hotel-view {
+    background-color: rgb(183, 208, 248);
+    color: blue;
+    padding: 4px;
+    width: 100px;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.hotel-address {
+    font-weight: 400;
+    color: rgb(49, 112, 231);
+    font-size: 12px;
+}
+
+.hotel-status {
+    margin-top: 16px;
+    color: red;
+}
+
+.hotel-item__price {
+    padding: 8px;
+
+}
+
+.hotel-item__price .sale-price {
+    padding: 4px 8px;
+    background-color: rgb(225, 45, 45);
+    color: white;
+    font-size: 12px;
+    margin-bottom: 4px;
+    margin-left: 20px;
+}
+
+.hotel-item__price .sale-price-2 {
+
+    padding: 4px 8px;
+    background-color: rgb(247, 212, 212);
+    color: rgb(225, 45, 45);
+    font-size: 16px;
+    margin-bottom: 12px;
+    /* max-width: 140px; */
+    margin-left: 60px;
+}
+
+.hotel-item__price .sale-price-3 {
+    color: green;
+    font-size: 16px;
+    margin-left: 60px;
+}
+
+.price-text {
+    font-size: 12px;
+    margin-left: 60px;
+
+}
+
+.strikediag {
+    background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, red, currentColor 50.5%, transparent 52.25%);
+}
+
+.old-price {
+    max-width: 120px;
+    margin: 16px 0;
+    margin-left: 60px;
+}
+
+.current-price {
+    font-size: 24px;
+    color: #000;
+    margin-left: 40px;
+    font-family: kite-mallory, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: red;
+    font-weight: 700;
+    text-size-adjust: 100%;
+}
+
+.choose-btn {
+    color: white;
+    background-color: rgb(49, 112, 231);
+    width: 132px;
+    height: 42px;
+    margin-top: 16px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.short-inf {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}

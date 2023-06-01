@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn Đặt Phòng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/hotel-booking/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="main" style="margin-top: 60px">
+        <div class="booking-section container">
+
+            <div class="user-infomation">
+                <div class="user-contact">
+                    <p class="contact-section-title">Thông tin liên lạc</p>
+                    <label for="">Họ và tên như trong hộ chiếu</label><br>
+                    <input class="fullname" placeholder="Nguyen Van A"></input><br><br>
+                    <label for="">Email</label><br>
+                    <input class="email" placeholder="example@gmail.com"><br><br>
+                    <label for="">Số điện thoại (không bắt buộc)</label><br>
+                    <input class="phoneNumber"></input><br><br>
+                    <label for="">Quốc gia cư trú</label><br>
+                    <input class="nationality" value="Việt Nam"></input><br>
+                </div>
+
+                <div class="special-user-request">
+                    <p class="request-title">Hãy cho chúng tôi biết quý khách cần gì</p>
+                    <label for="">Quy định hút thuốc (nếu có phòng):</label><br>
+                    <div class="smoking-rule-box">
+                        <input type="radio" name="smoking-rule" id="">
+                        <label for=""> Phòng không hút thuốc </label>
+                        <br>
+                        <input type="radio" name="smoking-rule" id="">
+                        <label for=""> Phòng hút thuốc</label>
+                        <br>
+                    </div>
+                    <br>
+                    <label for="">Chọn loại giường (nếu có phòng):</label><br>
+
+                    <div class="smoking-rule-box">
+                        <input type="radio" name="bed-option" id="">
+                        <label for=""> Tôi muốn lấy giường lớn</label>
+                        <br>
+                        <input type="radio" name="bed-option" id="">
+                        <label for=""> Tôi muốn lấy phòng 2 giường</label>
+                        <br>
+                    </div>
+
+
+                </div>
+
+                <div class="payment-detail">
+                    <div class="card-information">
+                        <div class="card-information__title">THẺ TÍN DỤNG/GHI NỢ</div>
+                        <label for="">Hình thức thanh toán</label><br>
+                        <select name="pay" id="cars">
+                            <option value="">-- Chọn hình thức thanh toán --</option>
+                            <option value="visa">Visa / MasterCard / Amex / JCB</option>
+                            <option value="credit">UnionPay - Creditcard</option>
+
+
+                        </select>
+                        <br><br>
+                        <label for="">Tên trên thẻ</label><br>
+                        <input type="text" class="name-in-card" placeholder="Nguyen Van A"><br><br>
+                        <label for="">Ngày hết hạn</label><br>
+                        <input type="date" class="exp"></input><br><br>
+                        <label for="">Mã bảo mật CVC</label><br>
+                        <input type="password" class="cvc" value=""></input><br>
+                    </div>
+                    <div class="card-img">
+                        <img src="/image/card/card-img.png" alt="">
+                    </div>
+                </div>
+                <form action="/hotels/booking-process" method="POST">
+                    <% for(let key in bookingInformation) { %>
+                        <input hidden type="text" name="<%= key%>" id="" value="<%= bookingInformation[key]%>">
+                        <% } %>
+                            <input hidden type="text" name="userId" id="" value="<%= userInfo.user.id%>">
+                            <button type="submit" class="booking-btn btn btn-primary">ĐẶT PHÒNG NGAY</button>
+                </form>
+            </div>
+            <div class="hotel-and-price-infomartion">
+                <div class="hotel-information">
+                    <p class="hotel-name">
+                        <%= hotelInformation.tenKS%>
+                    </p>
+                    <div class="hotel-rank">
+                        <% for(let i=0; i < hotelInformation.hangSao; i++) {%>
+                            <i class="hotel-star fa-solid fa-star"></i>
+                            <%}%>
+                    </div>
+                    <div class="hotel-address">
+                        <%= hotelInformation.diaChiChiTiet%>
+                    </div>
+                </div>
+                <div class="room-information">
+                    <div class="booking-date">
+                        <b>Thời gian</b><br>
+                        <%= searchInformation.checkIn%> - <%= searchInformation.checkOut%>
+                                <span class="ml-4">
+                                    (<%= searchInformation.nights%> đêm)
+                                </span>
+                    </div>
+                    <div class="booking-information  mt-4">
+                        <b>Thông tin</b><br>
+                        <%=searchInformation.rooms%> phòng,
+                            <%=searchInformation.adults%> người lớn,
+                                <%=searchInformation.children%> trẻ em
+
+                    </div>
+                    <div class="option-room-detail mt-4">
+                        <b>Phòng nghỉ</b><br>
+                        <% for(let option of roomOptionInformation) { %>
+                            <p><b>
+                                    <%=option.soLuongDat%>
+                                </b> x <%= option.tenLP%>
+                            </p>
+                            <% } %>
+                    </div>
+
+                    <div class="hotel-point mt-4">
+                        <div class="point-bg">
+                            8.4
+                        </div>
+                        <div class="point-desc">
+                            Vô cùng sạch sẽ
+                        </div>
+                    </div>
+                </div>
+                <div class="pay-information">
+                    <div class="room-pay-information">
+                        <b>Giá phòng</b>
+                        <div class="">
+                            <% for(let option of roomOptionInformation) { %>
+                                <div>
+                                    <b>
+                                        <%=option.soLuongDat%>
+                                    </b> x <%=option.tenLP%>
+                                        <br>
+                                        <div class="" style="margin-left: 90px; margin-right: 5px">
+                                            <%=option.soLuongDat%> x <%=option.giaHienTai%>₫ = <%=
+                                                        option.tongGiaHienTai%>₫
+                                        </div>
+                                        <hr>
+                                </div>
+                                <% } %>
+                        </div>
+                        <div class="total-price">
+                            <div class="">
+                                <b>Tổng giá phòng </b><br>
+                                <b>cho <%= searchInformation.nights%> đêm</b>
+                            </div>
+                            <span class="">
+                                <%=bookingInformation.totalPrice%>₫
+                            </span>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="user-pay-include-tax">
+                        <b>Giá tiền</b>
+                        <b>
+                            <%=bookingInformation.userPay%>₫
+
+                        </b>
+                    </div>
+                    <hr>
+                    <div class="tax-and-service-fee">
+                        <b>Giá đã bao gồm: Thuế 10%, Phí dịch vụ 5%</b>
+                    </div>
+                    <div class="repay">
+                        Quý khách sẽ được thưởng Hoàn tiền mặt 60 ngày sau ngày trả phòng, và quý khách có tối đa 120
+                        ngày để yêu cầu. Một thư điện tử sẽ được gửi cho quý khách để điền thẻ tín dụng/ghi nợ mà quý
+                        khách muốn nhận được phần thưởng. Hãy xem Điều khoản và Điều kiện
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+</p>

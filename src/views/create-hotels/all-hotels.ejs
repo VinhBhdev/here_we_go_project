@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý khách sạn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/create-hotels/add-hotels.css">
+    <link rel="stylesheet" href="/css/site/user-info.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="main container" style="margin-top: 60px; padding-top: 60px">
+        <h3 class="text-center">QUẢN LÝ KHÁCH SẠN</h3>
+        <a href="add-hotels" target="_blank"><button class="btn btn-primary mb-4">Thêm khách sạn</button></a>
+        <div class="hotel-owner-list">
+            <div class="hotel-owner-item">
+                <%for(let hotel of hotelsData){%>
+                    <div class="info-box booking-history-item df">
+
+                        <div class="image-container f3">
+                            <img src="<%= hotel.linkAnh%>" style="width: 100%" alt="">
+
+                        </div>
+                        <div class="booking-info f8">
+                            <a href="/create-hotels/hotel-detail/<%= hotel.idKS%>" target="_blank">
+                                <h5 class="hotel-name">
+                                    <%=hotel.tenKS%>
+                                </h5>
+                            </a>
+                            <span>
+                                <%=hotel.diaChiChiTiet%>
+                            </span>
+                            <br><br>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

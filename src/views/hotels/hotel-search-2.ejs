@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khách sạn</title>
+
+    <link rel="stylesheet" href="/css/hotel.css">
+    <link rel="stylesheet" href="/css/loading-modal.css">
+
+    <link rel="stylesheet" href="/font/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+
+
+</head>
+
+<body>
+    <div id="nav" style="font-family: mallory, Helvetica Neue, Helvetica, Arial, sans-serif;">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo" style="display: flex;">
+                <div class="div" style="margin-right: 5px; margin-left: 20px">
+                    <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px;">
+                </div>
+
+                <span style="margin-bottom: 18px; font-weight: 200;">HERE WE GO</span>
+
+            </div>
+        </a>
+        <div class="user-profile">
+            <% if(userInfo) {%>
+                <a href="/user-info" style="text-decoration: none; color: black">
+                    <div class="btn">
+                        <span style="font-size: 20px">
+                            <%= userInfo.user.username%>
+                        </span>
+                    </div>
+                </a>
+                <%} else {%>
+                    <a href="/signin"
+                        style="color: #000; font-size: 16px; text-decoration: none; margin-right: 15px">Đăng nhập</a>
+                    <a href="/signup" style="color: #000; font-size: 16px; text-decoration: none;">Đăng ký</a>
+                    <%}%>
+        </div>
+    </div>
+    <div id="main" style="margin-top: 120px">
+        <%let dateConvert=(date)=> {
+            let arr = date.split('/');
+            return arr[1] + '/' + arr[0] + '/' + arr[2];
+            }%>
+            <div class="short-inf">
+                <input hidden type="text" name="" id="searchInformation" value="<%=JSON.stringify(searchInformation)%>">
+                <form action="/hotels/search" method="GET" class="inf-form">
+                    <input type="text" placeholder="Dia diem..." name="city" id="place-search"
+                        value="<%= searchInformation.city %>">
+                    <div class="date-inf">
+                        <input type="datetime" placeholder="Tu ngay..." name="" id="date-from"
+                            value="<%= dateConvert(searchInformation.checkIn) %>">
+                        <input type="datetime" hidden placeholder="Số đêm..." name="" id="nights"
+                            value="<%= searchInformation.nights %>">
+                        <input type="datetime" placeholder="Den ngay..." name="" id="date-to"
+                            value="<%= dateConvert(searchInformation.checkOut) %>">
+                    </div>
+                    <div class="quantity">
+                        <input type="text" placeholder="Số lượng" name="" id="quantity__person"
+                            value="<%= searchInformation.adults %> người lớn, <%= searchInformation.children %> trẻ em, <%= searchInformation.rooms %> phòng">
+                    </div>
+                    <input type="submit" value="TÌM" class="search-btn">
+                </form>
+            </div>
+
+            <div class="hotel-body">
+                <div class="nav-bar">
+                    <div class="search-btn">
+                        <input type="text" placeholder="Tìm kiếm văn bản" name="" id="search-text">
+                    </div>
+
+                    <div class="filter">
+                        <div class="filter__price">
+                            <div class="min-price">
+                                <p class="">Tối thiểu</p>
+
+                                <input type="text" name="" id="min-price-val" value="0" class="">
+                            </div>
+                            <div class="max_price">
+                                <p class="">Tối đa</p>
+                                <input type="text" name="" id="max-price-val" value="10,000,000" class="">
+                            </div>
+                        </div>
+
+                        <div class="filter-box filter__type">
+                            <p><b>Loại hình nơi ở</b></p>
+                            <input type="checkbox" id="type1" name="type" value="khach san">
+                            <label for="type1">Khách sạn</label><br><br>
+
+                            <input type="checkbox" id="type2" name="type" value="resort">
+                            <label for="type2">Resort</label><br><br>
+
+                            <input type="checkbox" id="type3" name="type" value="nha nghi">
+                            <label for="type3">Nhà khách</label><br><br>
+
+                            <input type="checkbox" id="type4" name="type" value="nha nghi">
+                            <label for="type4">Nhà nghỉ</label><br><br>
+
+                            <input type="checkbox" id="type5" name="type" value="5">
+                            <label for="type5">Toàn bộ căn hộ</label><br><br>
+
+                            <input type="checkbox" id="type6" name="type" value="6">
+                            <label for="type6">Homestay</label><br><br>
+
+                            <input type="checkbox" id="type7" name="type" value="7">
+                            <label for="type7">Biệt thự nghỉ dưỡng</label><br><br>
+
+                            <input type="checkbox" id="type8" name="type" value="8">
+                            <label for="type8">Toàn bộ nhà riêng</label><br><br>
+
+                            <input type="checkbox" id="type9" name="type" value="9">
+                            <label for="type9">Khach san</label><br><br>
+
+                            <input type="checkbox" id="type10" name="type" value="10">
+                            <label for="type10">Khách sạn tình yêu</label><br><br>
+
+
+                        </div>
+
+                        <div class="filter-box filter__rank">
+                            <p><b>Hạng sao</b></p>
+                            <input type="checkbox" id="rank1" name="rank" value="5">
+                            <label for="rank1">
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                            </label><br><br>
+
+                            <input type="checkbox" id="rank2" name="rank" value="4">
+                            <label for="rank2">
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                            </label><br><br>
+
+                            <input type="checkbox" id="rank3" name="rank" value="3">
+                            <label for="rank3">
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                            </label><br><br>
+
+                            <input type="checkbox" id="rank4" name="rank" value="2">
+                            <label for="rank4">
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                            </label><br><br>
+
+                            <input type="checkbox" id="rank5" name="rank" value="1">
+                            <label for="rank5">
+                                <i class="hotel-star fa-solid fa-star" style="color: orange"></i>
+                            </label><br><br>
+
+                            <input type="checkbox" id="rank6" name="rank" value="0">
+                            <label for="rank6">
+                                Chưa xếp hạng
+                            </label><br><br>
+
+                        </div>
+
+                        <div class="erase-filter" style="cursor: pointer;">
+                            <span>Xóa bộ lọc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotel-chosen">
+                    <div class="hotel-sort">
+                        <p class="hotel-sort__text">Sắp xếp</p>
+                        <div class="hotel-sort__item">
+                            <input hidden type="text" name="sort-by" id="" value="1">
+                            Phù hợp nhất
+                        </div>
+                        <div class="hotel-sort__item">
+                            <input hidden type="text" name="sort-by" id="" value="2">
+                            Giá thấp nhất trước</a>
+                        </div>
+                        <div class="hotel-sort__item">
+                            <input hidden type="text" name="sort-by" id="" value="3">
+                            Khoảng cách
+                        </div>
+                        <div class="hotel-sort__item">
+                            <input hidden type="text" name="sort-by" id="" value="4">
+                            Được đánh giá <br> nhiều nhất
+                        </div>
+                        <div class="hotel-sort__item">
+                            <input hidden type="text" name="sort-by" id="" value="5">
+                            Ưu đãi lớn
+                        </div>
+                    </div>
+
+                    <ul class="hotel-list">
+
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="loading-modal" style="display: none;">
+                <div class="classic-2"></div>
+            </div>
+    </div>
+
+    <script>
+        // xử lý loading modal
+        function handleLoadingModal() {
+            let loadingModal = document.querySelector('.loading-modal');
+            loadingModal.style.display = 'block';
+            setTimeout(function () {
+                loadingModal.style.display = 'none';
+            }, 500)
+        }
+    </script>
+    <script>
+        // searchInformation để gửi thông tin về ajax lấy data;
+        let searchInformation = document.querySelector('#searchInformation');
+        searchInformation = JSON.parse(searchInformation.value);
+
+        let getHotelsList = async () => {
+            $.ajax({
+                url: "/hotels/hotels-search-api",
+                type: "get", //send it through get method
+                data: {
+                    searchInformation,
+                    filterData,
+                    sortData,
+                },
+                success: function (data) {
+                    console.log(">>>CHECK DATA")
+                    console.log(data);
+                    renderHotelsList(data);
+                    // handleTicketDetailLink();
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+
+        }
+
+        let filterData = {
+            type: '',
+            rank: '',
+            minPrice: 0,
+            maxPrice: 10000000,
+            searchKeyword: ''
+        }
+        let sortData = '';
+
+        // Begin: Lọc theo từ khóa
+        let searchKeywordElement = document.querySelector('#search-text');
+        searchKeywordElement.onchange = function () {
+            clearFilterData();
+            filterData.searchKeyword = searchKeywordElement.value;
+            getHotelsList();
+        }
+        // Begin: lọc theo loại hình nhà ở
+        let filterTypeElements = document.querySelectorAll('.filter__type input');
+        for (let item of filterTypeElements) {
+            item.oninput = function () {
+                let resultType = [];
+                for (let x of filterTypeElements) {
+                    if (x.checked) {
+                        resultType.push(x.value);
+                    }
+                }
+                filterData.type = resultType;
+                getHotelsList();
+            }
+        }
+        // End: lọc theo loại hình nhà ở
+        // Begin: lọc theo rank
+        let filterRankElements = document.querySelectorAll('.filter__rank input');
+        for (let item of filterRankElements) {
+            item.oninput = function () {
+                let resultRank = [];
+                for (let x of filterRankElements) {
+                    if (x.checked) {
+                        resultRank.push(x.value);
+                    }
+                }
+                filterData.rank = resultRank;
+                console.log(filterData);
+                getHotelsList();
+            }
+        }
+        // End: lọc theo rank
+        // Begin: Lọc theo giá
+        let minPriceElement = document.querySelector("#min-price-val");
+        let maxPriceElement = document.querySelector("#max-price-val");
+        minPriceElement.oninput = function () {
+            minPriceElement.value = xulyTien(minPriceElement.value.split(",").join(""));
+        }
+        maxPriceElement.oninput = function () {
+            maxPriceElement.value = xulyTien(maxPriceElement.value.split(",").join(""));
+        }
+        function onchangePrice() {
+            filterData.minPrice = minPriceElement.value.split(",").join("");
+            filterData.maxPrice = maxPriceElement.value.split(",").join("");
+            getHotelsList();
+        }
+        minPriceElement.onchange = onchangePrice;
+        maxPriceElement.onchange = onchangePrice;
+
+        // End: Lọc theo giá
+        // clear Filter
+        let clearFilterData = () => {
+            filterData = {
+                type: '',
+                rank: '',
+                minPrice: 0,
+                maxPrice: 10000000,
+            }
+            minPriceElement.value = "0";
+            maxPriceElement.value = "10,000,000";
+            for (let x of filterTypeElements) {
+                x.checked = false;
+            }
+            for (let x of filterRankElements) {
+                x.checked = false;
+            }
+
+        }
+        // Begin: sắp xếp
+        let sortElements = document.querySelectorAll('.hotel-sort__item');
+        for (let item of sortElements) {
+            item.onclick = function () {
+                clearFilterData();
+                let val = item.querySelector('input').value;
+                sortData = val;
+                // alert(val);
+                getHotelsList();
+            }
+        }
+        // End: sắp xếp
+
+        // 
+        let eraseFilterElement = document.querySelector(".erase-filter");
+        eraseFilterElement.onclick = function () {
+            clearFilterData();
+            getHotelsList();
+        }
+        //
+
+        function xulyTien(s) {
+            s = "" + s;
+            let res = '';
+            let cnt = 0;
+            for (let i = s.length - 1; i >= 0; i--) {
+                cnt++;
+                res += s[i];
+                if (cnt % 3 == 0 && i != 0) res += ',';
+            }
+            res = res.split("").reverse().join("");
+            return res;
+        }
+        getHotelsList();
+
+        function renderHotelsList(data) {
+            let htmls = '';
+            for (let hotel of data.hotelsData) {
+                console.log(hotel);
+                htmls += `
+                <li class="hotel-item">
+                                    <div class="hotel-item__img">
+                                        <img src="${hotel.linkAnh}" alt="" class="main-img">
+
+                                        <img src="/image/hotel/KS01/main-img.jpg" alt="" class="small-img">
+
+                                        <img src="/image/hotel/KS01/main-img.jpg" alt="" class="small-img">
+
+                                        <img src="/image/hotel/KS01/main-img.jpg" alt="" class="small-img">
+
+                                        <img src="/image/hotel/KS01/main-img.jpg" alt="" class="small-img">
+                                    </div>
+
+
+                                    <div class="hotel-item__desc">
+                                        <a href="/hotels/detail/${hotel.idKS}" style="text-decoration:  none;">
+                                            <p class="hotel-name">
+                                                ${hotel.tenKS}
+                                            </p>
+                                        </a>
+                                        <div class="hotel-rank">`
+                for (let star = 0; star < hotel.hangSao; star++) {
+                    htmls += `                            <i class="hotel-star fa-solid fa-star" style="color: orange"></i>`;
+                }
+
+                htmls +=
+                    `</div>
+                                        <p class="hotel-address">
+                                            ${hotel.tenKV}, ${hotel.tenTinh} - cách trung tâm 2,0 km
+                                        </p>
+
+                                        <ul class="hotel-utilities">
+                                            <li class="">Bữa sáng</li>
+                                            <li class="">Phòng tập</li>
+                                            <li class="">Bể bơi</li>
+                                            <li class="">10+</li>
+                                        </ul>
+                                        <div class="hotel-view">
+                                            <i class="ti-target"></i>
+                                            Hướng biển
+                                        </div>
+                                        <div class="hotel-status">
+                                            <i class="ti-flag-alt"></i>
+                                            Đang bán chạy, lần gần nhất cách đây 30 phút!
+                                        </div>
+                                    </div>
+
+                                    <div class="hotel-item__price">
+                                        <div class="sale-price">
+                                            Đang còn 2 phòng giảm 50%
+                                        </div>
+
+                                        <div class="sale-price-2">`
+                if (hotel.uuDaiLon >= 20) {
+                    htmls += `
+                                                <b>
+                                                    <p>BIG SALE ${hotel.uuDaiLon}%</p>
+                                                </b>`
+                } else {
+                    htmls += `GIẢM GIÁ ${hotel.uuDaiLon}%`
+                }
+                htmls += `                
+                                        </div>
+
+                                        <div class="price-text">
+                                            Giá mỗi đêm rẻ nhất từ
+                                        </div>
+                                        <div class=" old-price" >
+                                            <div style="text-align: right; margin-right: 5px; text-decoration: line-through;">
+                                            ${xulyTien(hotel.giaGocReNhat)} ₫
+                                            </div>
+                                        </div>
+
+                                        <div class="current-price" style="text-align: right;  margin-right: 5px">
+                                            ${xulyTien(hotel.giaReNhatSauUuDai)} ₫</b>
+                                        </div>
+                                        <div class="sale-price-3" >
+                                            + HỦY MIỄN PHÍ
+                                        </div>
+                                        <a href="/hotels/detail/${hotel.idKS}" style="text-decoration: none;">
+                                            <input type="submit" value="CHỌN PHÒNG" class="choose-btn"></a>
+
+                                        </input></a>
+                                    </div>
+                                </li>
+                `
+            }
+            handleLoadingModal();
+            document.querySelector('.hotel-list').innerHTML = htmls;
+            if (!htmls) {
+                document.querySelector('.hotel-list').innerHTML = '<div class="" style="padding: 10px; background-color: #20274d; color: white; font-size: 18px; text-align: center">Không tìm được khách sạn phù hợp</div>';
+            }
+        }
+
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,15 @@
+.hotel-owner-list {
+    display: flex;
+}
+
+.f1 {
+    flex: 1
+}
+
+.info-box {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}

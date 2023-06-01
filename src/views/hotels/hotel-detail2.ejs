@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Here We Go</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/hotel-detail/top-nav.css">
+    <link rel="stylesheet" href="/css/hotel-detail/style.css">
+    <link rel="stylesheet" href="/css/hotel-detail/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/hotel.css">
+
+
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+</head>
+<%let dateConvert=(date)=> {
+    let arr = date.split('/');
+    return arr[1] + '/' + arr[0] + '/' + arr[2];
+    }%>
+
+    <body>
+        <div id="nav">
+            <a href="/" style="text-decoration: none; color: black">
+                <div class="logo">
+                    <img src="/image/site/logo-2.png" alt="" class="ml-4"
+                        style="height: 55px; margin-bottom: 8px; display: inline;">
+                    HERE WE GO
+                </div>
+            </a>
+            <div class="user-profile">
+                <div class="" style="display: flex;">
+                    <!-- <i class="ti-id-badge"></i> -->
+                    <% if(userInfo) {%>
+
+                        <a href="/user-info" style="text-decoration: none; color: black">
+                            <div class="btn">
+                                <span style="font-size: 20px">
+                                    <%= userInfo.user.username%>
+                                </span>
+                            </div>
+                        </a>
+                        <%} else {%>
+                            <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                            <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                            <%}%>
+                </div>
+            </div>
+        </div>
+        <div class="short-inf">
+            <form action="" class="inf-form">
+                <input type="text" placeholder="Dia diem..." id="place-search" value="<%= searchInformation.city %>">
+                <div class="date-inf">
+                    <input type="datetime" placeholder="Tu ngay..." name="" id="date-from"
+                        value="<%= dateConvert(searchInformation.checkIn) %>">
+                    <input type="datetime" hidden placeholder="Số đêm..." name="" id="nights"
+                        value="<%= searchInformation.nights %>">
+                    <input type="datetime" placeholder="Den ngay..." name="" id="date-to"
+                        value="<%= dateConvert(searchInformation.checkOut) %>">
+                </div>
+                <div class="quantity">
+                    <input type="text" placeholder="Số lượng" name="" id="quantity__person"
+                        value="<%= searchInformation.adults %> người lớn, <%= searchInformation.children %> trẻ em, <%= searchInformation.rooms %> phòng">
+                    <input type="text" name="" id="number-of-adults" value="<%= searchInformation.adults %>" hidden>
+                    <input type="text" name="" id="number-of-childrens" value="<%= searchInformation.children %>"
+                        hidden>
+                    <input type="text" name="" id="number-of-rooms" value="<%= searchInformation.rooms %>" hidden>
+                </div>
+                <input type="submit" value="TÌM" class="search-btn">
+            </form>
+        </div>
+
+        <div class="main">
+
+            <%let xulyTien=(s)=> {
+                s = "" + s;
+                let res = '';
+                let cnt = 0;
+                for (let i = s.length - 1; i >= 0; i--) {
+                cnt++;
+                res += s[i];
+                if (cnt % 3 == 0 && i != 0) res += ',';
+                }
+                res = res.split("").reverse().join("");
+                return res;
+                }%>
+                <div id="hotel-overview">
+                    <div class="hotel-pictures">
+                        <div class="main-pic">
+                            <img src="<%= hotelInformation.linkAnh %>" alt="">
+                        </div>
+                        <div class="other-pics">
+
+                            <div class="other-pics__card card-group">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/81992052.jpg?k=e9db42be7d10cc5eadb4d16c2f5f6262ba418f487392454bfc8aaf2c6de47fd9&o="
+                                        alt="Card image cap">
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://pix8.agoda.net/hotelImages/308204/-1/cf5c977ba049bdf5773a4346995c7a4e.jpg?ca=13&ce=1&s=1024x768"
+                                        alt="Card image cap">
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://pix8.agoda.net/hotelImages/308204/-1/fbbcd735821312026b6e103095f1e826.jpg?ca=9&ce=1&s=1024x768"
+                                        alt="Card image cap">
+                                </div>
+                            </div>
+                            <div class="other-pics__card card-group">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://pix8.agoda.net/hotelImages/1214913/-1/e5c353993f7697dbe04cecff51ec18e4.jpg?ca=8&ce=1&s=1024x768"
+                                        alt="Card image cap">
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://pix8.agoda.net/hotelImages/1214913/-1/0b3365dead37392dc403ccd27422c1b7.jpg?ca=8&ce=1&s=1024x768"
+                                        alt="Card image cap">
+                                </div>
+                                <div class="card">
+                                    <img class="card-img-top"
+                                        src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/354018405.jpg?k=71944b2075ab81bc5b822b7c8fe59a0b4628034b643fe31691c5ca0b6f234724&o="
+                                        alt="Card image cap">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-nav">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link" href="#">Tổng quan</a>
+                                <a class="nav-item nav-link" href="#hotel-rooms">Phòng nghỉ</a>
+                                <a class="nav-item nav-link" href="#hotel-benefit">Tiện nghi</a>
+                                <a class="nav-item nav-link" href="#">Đánh giá</a>
+                                <a class="nav-item nav-link" href="#hotel-policy">Chính sách</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <div id="hotel-information">
+                    <div class="">
+                        <div class="hotel-introduction">
+                            <h3 class="hotel-name" style="font-size: 24px">
+                                <%= hotelInformation.tenKS %>
+                            </h3>
+                            <br>
+                            <% for(let i=0; i < hotelInformation.hangSao; i++) {%>
+                                <i class="hotel-star fa-solid fa-star" style="color: orange; font-size: 13px;"></i>
+                                <% } %>
+
+                                    <p class="hotel-desc-text">
+                                        Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại khách sạn
+                                        này, nơi có
+                                        Wi-Fi
+                                        miễn
+                                        phí trong tất cả các phòng. Nằm ở vị trí chiến lược tại Hải Châu, cho phép quý
+                                        khách lui
+                                        tới
+                                        và
+                                        gần
+                                        với các điểm thu hút và tham quan địa phương. Hãy nhớ dành một chút thời gian để
+                                        thăm
+                                        thú
+                                        Ngũ
+                                        Hành
+                                        Sơn cũng như Biển Mỹ Khê gần đó. Được xếp hạng 3 sao, chỗ nghỉ chất lượng cao
+                                        này cho
+                                        phép
+                                        khách
+                                        nghỉ sử dụng bể bơi trong nhà và phòng tập ngay trong khuôn viên.
+                                    </p>
+
+                                    <br><br>
+
+                        </div>
+                        <div class="hotel-introduction mt-4" id="hotel-benefit">
+                            <h6>Tiện nghi</h6>
+                            <div class=" hotel-benefit">
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Bàn tiếp tân [24 giờ]
+                                </div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Đưa đón sân bay</div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Thuê xe đạp</div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Bãi đỗ xe có nhân viên
+                                </div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Bể bơi [trong nhà]</div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>CLB trẻ em</div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Dịch vụ đưa đón</div>
+                                <div class="benefit-item"><i class="fa-solid fa-check mr-2"></i>Wi-Fi miễn phí trong tất
+                                    cả
+                                    các phòng!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hotel-review">
+                        <h4>8,4 Tuyệt vời</h4>
+                        <p style="color: rgb(1, 148, 243);">168 bài đánh giá</p>
+                        <img src="/image/hotel/map.png" style="height: 120px" alt="">
+                        <div class="sub-title">Nơi có thể đi bộ</div>
+                        <div class="df">
+                            <div class="f2">
+                                <span class="sub-desc"> <i class="fa-solid fa-location-dot mr-2"></i>Bãi biển Bắc Mỹ
+                                    An</span><br>
+                                <span class="sub-desc"> <i class="fa-solid fa-location-dot mr-2"></i>Beach Hotel
+                                    Park</span><br>
+                                <span class="sub-desc"> <i class="fa-solid fa-location-dot mr-2"></i>Công viên Bãi biển
+                                    Mỹ
+                                    Khê</span><br>
+                                <span class="sub-desc"> <i class="fa-solid fa-location-dot mr-2"></i>Chợ đêm Đà
+                                    Nẵng</span><br>
+                                <span class="sub-desc"> <i class="fa-solid fa-location-dot mr-2"></i>Cửa hàng
+                                    StormX</span><br>
+                            </div>
+                            <div class="">
+                                <span class="sub-desc">50m</span><br>
+                                <span class="sub-desc">150m</span><br>
+                                <span class="sub-desc">250m</span><br>
+                                <span class="sub-desc">350m</span><br>
+                                <span class="sub-desc">550m</span><br>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Rooms: Begin -->
+                <!-- <a href="/hotels/detail/<%=hotelInformation.idKS%>/sort-by-price" class="sort-by-price">sort-by-price</a> -->
+
+                <button class="btn btn-info best-option-price" style="margin-top: 24px; border-radius: 0;">GIÁ RẺ NHẤT
+                    DÀNH CHO <%= searchInformation.adults %>
+                        người lớn, <%= searchInformation.children %> trẻ em </button>
+                <div class="best-option-price-container">
+                    <div class="best-option-price-list"></div>
+                    <div class="best-option-price-book">
+                        <form method="POST" action="/auth-before-booking-hotels" class="min-cost"></form>
+
+                    </div>
+                </div>
+                <div id="hotel-rooms">
+                    <h4><b>Chọn phòng</b></h4>
+                    <div class="hotel-rooms__filter">
+                        <div class="filter-text">Chọn lọc:</div>
+                        <div class="filter_list p-1">
+                            <div class="filter_item">Thanh toán tại nơi ở</div>
+                            <div class="filter_item">Có ăn sáng</div>
+                            <div class="filter_item">Không hút thuốc</div>
+                            <div class="filter_item">Giường lớn</div>
+                            <div class="filter_item">Hướng biển</div>
+
+                        </div>
+
+                    </div>
+
+
+                    <br><br>
+                    <h4>Chọn chế độ chọn phòng</h4>
+                    <button class="btn btn-primary che-do-1">Chế độ 1</button>
+                    <button class="btn btn-secondary che-do-2">Chế độ 2</button>
+                </div>
+                <div class="rooms-list">
+                    <% for(let idLP in roomsInformation) { %>
+                        <% if(soLuongConLai[idLP] <=0) continue; %>
+                            <% let loaiPhong=roomsInformation[idLP] %>
+
+                                <div class="room-item" id="LP<%= Object.values(loaiPhong)[0].idLP %>">
+                                    <div class="room-item__heading">
+                                        <b>
+                                            <%= Object.values(loaiPhong)[0].tenLP%>
+                                        </b>
+                                    </div>
+
+
+                                    <div class="room-item__body">
+                                        <div class="room-type">
+                                            <div class="title">
+                                                Loại phòng
+                                            </div>
+
+                                            <div class="content">
+                                                <img class="room-type-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <img class="room-type-small-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <img class="room-type-small-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <% if(Object.values(loaiPhong)[0].giuongDon) {%>
+                                                    <p>
+                                                        <%= Object.values(loaiPhong)[0].giuongDon%> giường đơn
+                                                    </p>
+                                                    <% } %>
+                                                        <% if(Object.values(loaiPhong)[0].giuongDoi) {%>
+                                                            <p>
+                                                                <%= Object.values(loaiPhong)[0].giuongDoi%> giường
+                                                                    đôi
+                                                            </p>
+                                                            <% } %>
+                                                                <% if(Object.values(loaiPhong)[0].giuongDoiLon) {%>
+                                                                    <p>
+                                                                        <%= Object.values(loaiPhong)[0].giuongDoiLon%>
+                                                                            giường
+                                                                            lớn
+                                                                    </p>
+                                                                    <% } %>
+                                                                        <p>Diện tích <%=
+                                                                                Object.values(loaiPhong)[0].dienTich%>
+                                                                                (m2)</p>
+                                                                        <p>Hướng <%=
+                                                                                Object.values(loaiPhong)[0].huongPhong%>
+                                                                        </p>
+                                                                        <p>Còn lại <b class="soLuongConLaiCuaLCP"
+                                                                                style="color:red">
+                                                                                <%= soLuongConLai[idLP]%>
+                                                                            </b>
+                                                                            phòng loại này</p>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="room-options-container">
+                                            <% for(let luaChonPhong of Object.values(loaiPhong)) { %>
+                                                <div class="room-option LCP<%=luaChonPhong.idLCP%>">
+
+                                                    <div class="benerfits">
+                                                        <div class="title">
+                                                            Lợi ích
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <!-- dấu tên loại phòng tạm vào đây -->
+                                                            <input hidden class="type-room-name" type="text"
+                                                                value="<%= Object.values(loaiPhong)[0].tenLP%>">
+                                                            <% for(let loiIch of luaChonPhong.loiIchPhongO) {%>
+                                                                <p>
+                                                                    <%= loiIch %>
+                                                                </p>
+                                                                <% } %>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sleeps">
+                                                        <div class="title">
+                                                            Sức chứa
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <i class="fa-solid fa-user"></i> x <span>
+                                                                <%=luaChonPhong.sucChuaNguoiLon%>
+                                                            </span> <br>
+                                                            <i class="fa-solid fa-child-reaching"></i> x <span>
+                                                                <%=luaChonPhong.sucChuaTreEm%>
+                                                            </span>
+
+                                                            <input hidden class="sleeps__adult"
+                                                                value="<%=luaChonPhong.sucChuaNguoiLon%>">
+
+                                                            <input hidden class="sleeps__children"
+                                                                value="<%=luaChonPhong.sucChuaTreEm%>">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pay-cancel">
+                                                        <div class="title">
+                                                            Thanh toán và hủy bỏ
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <b>Hủy bỏ</b><br>
+                                                            <%= luaChonPhong.chinhSachHuyPhong%>
+                                                                <br><br>
+                                                                <b>Thanh toán</b><br>
+                                                                <%= luaChonPhong.chinhSachThanhToan%>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="quantity">
+                                                        <div class="title">
+                                                            Số lượng
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <!-- <div class="f1">
+                                                                    
+                                                                </div> -->
+                                                            <div class="df">
+                                                                <button class="btn num-btn de-btn btn-secondary f1"><i
+                                                                        class="fa-sharp fa-solid fa-minus"></i></button>
+                                                                <div class="room-option-quantity-text  f2">0</div>
+                                                                <input hidden type="text" name=""
+                                                                    class="room-option-quantity" value="0" min="0">
+                                                                <button class="btn num-btn in-btn btn-info f1"><i
+                                                                        class="fa-sharp fa-solid fa-plus mr-2"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="price-per-night">
+                                                        <div class="title">
+                                                            Giá phòng/đêm
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <span class="room-option-old-price">
+                                                                <%= xulyTien(luaChonPhong.giaGoc.toFixed(0))%> VND
+                                                            </span><br>
+                                                            <!-- Giá mới nhất: -->
+                                                            <span class="room-option-sale">Giảm giả <%=
+                                                                    luaChonPhong.uuDai%>
+                                                                    %</span><br>
+                                                            <input hidden
+                                                                class="room-option-current-price LCP<%=luaChonPhong.idLCP%>"
+                                                                value="<%= (luaChonPhong.giaGoc -
+                                                        luaChonPhong.giaGoc*luaChonPhong.uuDai/100).toFixed(0)%>">
+
+                                                            <br><br><br>
+                                                            <div class="easy-looking-price">
+                                                                <%= xulyTien((luaChonPhong.giaGoc -
+                                                                    luaChonPhong.giaGoc*luaChonPhong.uuDai/100).toFixed(0))%>
+                                                                    VND
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <% }%>
+                </div>
+
+                <!-- Demo: Room-list 2 -->
+                <div class="rooms-list-2" style="display: none;">
+                    <div class="empty-option"></div>
+                    <% for(let idLP in roomsInformation) { %>
+                        <% if(soLuongConLai[idLP] < searchInformation.rooms) continue; %>
+                            <% let loaiPhong=roomsInformation[idLP] %>
+                                <div class="room-item" id="LP<%= Object.values(loaiPhong)[0].idLP %>">
+                                    <div class="room-item__heading">
+                                        <b>
+                                            <h3 style="display: inline;">
+                                                <%= searchInformation.rooms %>
+                                            </h3> x <%= Object.values(loaiPhong)[0].tenLP%>
+
+                                        </b><br>
+                                    </div>
+
+
+                                    <div class="room-item__body">
+                                        <div class="room-type">
+                                            <div class="title">
+                                                Loại phòng
+                                            </div>
+
+                                            <div class="content">
+                                                <img class="room-type-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <img class="room-type-small-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <img class="room-type-small-img"
+                                                    src="https://pix8.agoda.net/hotelImages/38046327/627432597/34a75fa3b8ba1d6a79bf071c0470c321.jpg?ce=0&s=208x117&ar=16x9"
+                                                    alt="">
+                                                <% if(Object.values(loaiPhong)[0].giuongDon) {%>
+                                                    <p>
+                                                        <%= Object.values(loaiPhong)[0].giuongDon%> giường đơn
+                                                    </p>
+                                                    <% } %>
+                                                        <% if(Object.values(loaiPhong)[0].giuongDoi) {%>
+                                                            <p>
+                                                                <%= Object.values(loaiPhong)[0].giuongDoi%> giường
+                                                                    đôi
+                                                            </p>
+                                                            <% } %>
+                                                                <% if(Object.values(loaiPhong)[0].giuongDoiLon) {%>
+                                                                    <p>
+                                                                        <%= Object.values(loaiPhong)[0].giuongDoiLon%>
+                                                                            giường
+                                                                            lớn
+                                                                    </p>
+                                                                    <% } %>
+                                                                        <p>Diện tích <%=
+                                                                                Object.values(loaiPhong)[0].dienTich%>
+                                                                                (m2)</p>
+                                                                        <p>Hướng <%=
+                                                                                Object.values(loaiPhong)[0].huongPhong%>
+                                                                        </p>
+                                                                        <p>Còn lại <b class="soLuongConLaiCuaLCP"
+                                                                                style="color:red">
+                                                                                <%= soLuongConLai[idLP]%>
+                                                                            </b>
+                                                                            phòng loại này</p>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="room-options-container">
+                                            <% for(let luaChonPhong of Object.values(loaiPhong)) { %>
+                                                <div class="room-option LCP<%=luaChonPhong.idLCP%>">
+
+                                                    <div class="benerfits">
+                                                        <div class="title">
+                                                            Lợi ích
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <% for(let loiIch of luaChonPhong.loiIchPhongO) {%>
+                                                                <p>
+                                                                    <%= loiIch %>
+                                                                </p>
+                                                                <% } %>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sleeps">
+                                                        <div class="title">
+                                                            Sức chứa
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <i class="fa-solid fa-user"></i> x <span>
+                                                                <%=luaChonPhong.sucChuaNguoiLon%>
+                                                            </span> <br>
+                                                            <i class="fa-solid fa-child-reaching"></i> x <span>
+                                                                <%=luaChonPhong.sucChuaTreEm%>
+                                                            </span>
+
+                                                            <input hidden class="sleeps__adult"
+                                                                value="<%=luaChonPhong.sucChuaNguoiLon%>">
+
+                                                            <input hidden class="sleeps__children"
+                                                                value="<%=luaChonPhong.sucChuaTreEm%>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pay-cancel">
+                                                        <div class="title">
+                                                            Thanh toán và hủy bỏ
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <b>Hủy bỏ</b><br>
+                                                            <%= luaChonPhong.chinhSachHuyPhong%>
+                                                                <br><br>
+                                                                <b>Thanh toán</b><br>
+                                                                <%= luaChonPhong.chinhSachThanhToan%>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="quantity">
+                                                <div class="title">
+                                                    Số lượng
+                                                </div>
+
+                                                <div class="content">
+                                                    <input type="number" name="" class="room-option-quantity" value="0"
+                                                        min="0">
+                                                </div>
+                                            </div> -->
+
+                                                    <div class="price-per-night">
+                                                        <div class="title">
+                                                            Giá phòng/đêm
+                                                        </div>
+
+                                                        <div class="content">
+                                                            <span class="room-option-old-price">
+                                                                <%= xulyTien(luaChonPhong.giaGoc.toFixed(0))%> VND
+                                                            </span><br>
+                                                            <!-- Giá mới nhất: -->
+                                                            <span class="room-option-sale">Giảm giả <%=
+                                                                    luaChonPhong.uuDai%>
+                                                                    %</span><br>
+                                                            <input hidden
+                                                                class="room-option-current-price LCP<%=luaChonPhong.idLCP%>"
+                                                                value="<%= (luaChonPhong.giaGoc -
+                                                            luaChonPhong.giaGoc*luaChonPhong.uuDai/100).toFixed(0)%>">
+
+                                                            <br><br><br>
+                                                            <div class="easy-looking-price">
+                                                                <%= xulyTien((luaChonPhong.giaGoc -
+                                                                    luaChonPhong.giaGoc*luaChonPhong.uuDai/100).toFixed(0))%>
+                                                                    VND
+                                                            </div>
+
+
+
+                                                            <button class="btn btn-primary watch-option-btn">Chọn
+                                                                phòng</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <% }%>
+                </div>
+        </div>
+        <!-- Rooms: End -->
+
+        <!-- <form action="" class="formBook_cd1">
+                <input type="text" name="LC5" id="" value="3">
+
+            </form> -->
+        <div class="container df" style="margin-bottom: 50px;" id="hotel-policy">
+            <div class="hotel-introduction hotel-main-img flex2">
+                <img src="<%= hotelInformation.linkAnh %>" alt="" style="height: 240px">
+            </div>
+            <div class="hotel-introduction flex3">
+                <h5>Quy định của chỗ nghỉ</h5>
+                <hr>
+                <p><b>Trẻ em và giường phụ</b><br>
+                    • Giường phụ tùy thuộc vào loại phòng bạn chọn, xin vui lòng kiểm tra thông tin phòng để biết thêm
+                    chi
+                    tiết <br>
+
+                    • Tất cả trẻ em đều được chào đón. <br>
+                    <br>
+                    <b>Quy định khác</b><br>
+                    • Trẻ em 0-5 tuổi ở miễn phí nếu sử dụng giường có sẵn. <br>
+                    • Trẻ em 6-11 tuổi sẽ tính phí 150.000 VND mỗi trẻ mỗi đêm khi sử dụng giường có sẵn. <br>
+                    • Trẻ em 12 tuổi trở lên được xem là người lớn. Sẽ tính phụ phí trẻ em bổ sung. <br>
+                    • Khi đặt trên 5 phòng, chính sách và điều khoản bổ sung có thể được áp dụng. <br>
+                </p>
+                <br>
+                <h5>Vài thông tin hữu ích</h5>
+                <hr>
+                <div class="df">
+                    <div class="flex2">
+                        <b>Nhận phòng/ Trả phòng</b><br>
+                        • Nhận phòng từ: <b>14:00</b> <br>
+                        • Nhận phòng đến: <b>11:59</b> <br>
+                        • Trả phòng đến: <b>12:00</b> <br>
+                        • Quầy tiếp tân mở cửa đến: <b>23:59</b> <br>
+                    </div>
+                    <div class="flex2">
+                        <b>Thông tin khác</b><br>
+                        • Phí bữa sáng (áp dụng khi không bao gồm trong giá phòng): <b>200000 VND</b> <br>
+                        • Phí Wifi/ Internet hàng ngày: <b>0 VND</b> <br>
+
+                    </div>
+                </div>
+                <div class="df mt-4">
+                    <div class="flex2">
+                        <b>Di chuyển</b><br>
+                        • Phí đưa đón sân bay: <b>280000 VND</b> <br>
+                        • Khoảng cách từ trung tâm <br> thành phố: <b>4 km </b> <br>
+                        • Thời gian đến sân bay (phút): <b>20 </b> <br>
+
+                    </div>
+                    <div class="flex2"></div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+        <div class="loading-modal">
+            <div class="classic-2"></div>
+        </div>
+        <!-- tính tiền đặt phòng -->
+        <form method="POST" action="/auth-before-booking-hotels" class="total-price"></form>
+        <form method="POST" action="/auth-before-booking-hotels" class="total-price-2"></form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+        <script>
+            let xulyTien = (s) => {
+                s = "" + s;
+                let res = '';
+                let cnt = 0;
+                for (let i = s.length - 1; i >= 0; i--) {
+                    cnt++;
+                    res += s[i];
+                    if (cnt % 3 == 0 && i != 0) res += ',';
+                }
+                res = res.split("").reverse().join("");
+                return res;
+            }
+        </script>
+        <script>
+            // xử lý tổng số lượng lựa chọn phòng không vượt quá số lượng loại phòng
+            let roomItemCD1Elements = document.querySelectorAll('.rooms-list .room-item');
+            roomItemCD1Elements.forEach((item) => {
+                // console.log(item.innerText.trim());
+                let numberAvailableRooms = item.querySelector('.soLuongConLaiCuaLCP').innerText.trim();
+                let numberInputOptionCD1Elements = item.querySelectorAll('.room-option-quantity');
+                let deBtnElements = item.querySelectorAll('.de-btn');
+                let inBtnElements = item.querySelectorAll('.in-btn');
+                let roomOptionQuantityText = item.querySelectorAll('.room-option-quantity-text');
+                console.log(numberInputOptionCD1Elements);
+                deBtnElements.forEach((item, index) => {
+                    item.onclick = function () {
+                        let val = +numberInputOptionCD1Elements[index].value;
+                        if (val === 0) return;
+                        numberInputOptionCD1Elements[index].value = +numberInputOptionCD1Elements[index].value - 1;
+                        roomOptionQuantityText[index].innerHTML = numberInputOptionCD1Elements[index].value
+                        handleChangeQuantity();
+                    }
+                })
+                inBtnElements.forEach((item, index) => {
+                    item.onclick = function () {
+                        let arr = Array.from(numberInputOptionCD1Elements);
+                        let sum = arr.reduce((sum, item) => sum + +item.value, 0);
+                        if (sum >= numberAvailableRooms) {
+                            alert(`Chỉ còn lại ${numberAvailableRooms} phòng loại này`);
+                            return;
+                        }
+                        numberInputOptionCD1Elements[index].value = +numberInputOptionCD1Elements[index].value + 1;
+                        roomOptionQuantityText[index].innerHTML = numberInputOptionCD1Elements[index].value
+                        handleChangeQuantity();
+                    }
+                })
+                // numberInputOptionCD1Elements.forEach((option) => {
+                //     option.onchange = function () {
+                //         let arr = Array.from(numberInputOptionCD1Elements);
+                //         let sum = arr.reduce((sum, item) => sum + +item.value, 0);
+                //         if (sum > numberAvailableRooms) {
+                //             option.value = "" + (+option.value - 1);
+                //             alert(`Chỉ còn lại ${numberAvailableRooms} phòng loại này`);
+                //         }
+                //     }
+                // })
+            })
+        </script>
+        <script>
+            // xử lý tính tiền phòng đối với Chế Độ 1
+            let soLuongLuaChonPhongElements = document.querySelectorAll('.rooms-list .room-option-quantity');
+            let giaTienLuaChonPhongElements = document.querySelectorAll('.rooms-list .room-option-current-price');
+            let totalPriceElement = document.querySelector('.total-price');
+            let numberOfNights = document.querySelector('#nights').value;
+            let numberOfAdults = document.querySelector('#number-of-adults').value;
+            let numberOfChilders = document.querySelector('#number-of-childrens').value;
+            let numberOfRooms = document.querySelector('#number-of-rooms').value;
+            let sleepsAdultElements = document.querySelectorAll('.rooms-list .sleeps .sleeps__adult');
+            let sleepsChildrenElemeents = document.querySelectorAll('.rooms-list .sleeps .sleeps__children');
+
+            function handleChangeQuantity() {
+                let html = '';
+                let totalPrice = 0;
+                let totalAdults = 0;
+                let totalChildrens = 0;
+                let priceDetail = '';
+                let totalRooms = 0;
+                for (let i = 0; i < soLuongLuaChonPhongElements.length; i++) {
+                    totalPrice += +soLuongLuaChonPhongElements[i].value * +giaTienLuaChonPhongElements[i].value;
+                    // console.log(+soLuongLuaChonPhongElements[i].value, +giaTienLuaChonPhongElements[i].value)
+
+                    if (+soLuongLuaChonPhongElements[i].value) {
+                        totalRooms += +soLuongLuaChonPhongElements[i].value;
+                        totalAdults += +soLuongLuaChonPhongElements[i].value * +sleepsAdultElements[i].value;
+                        totalChildrens += +soLuongLuaChonPhongElements[i].value * +sleepsChildrenElemeents[i].value;
+                        priceDetail += '<span class="price-detail">' + +soLuongLuaChonPhongElements[i].value + ' x ' + xulyTien(giaTienLuaChonPhongElements[i].value) + ' VND/phòng</span><br>'
+
+                        // roomOptionElements_cd1[i].classList[1]: LCP1, LCP2, ...
+                        // hidden input for idLCP
+                        priceDetail += `<input hidden type="text" name="${roomOptionElements_cd1[i].classList[1]}" id="" value="${+soLuongLuaChonPhongElements[i].value}">`
+                    }
+                }
+                html += '<div><span> Giá tiền cho 1 đêm </span><br>' + priceDetail + '</div>';
+                html += "<b>Tổng: " + xulyTien(totalPrice) + " VND</b>";
+
+                // hidden input for thành tiền
+                html += `<input hidden type="text" name="totalPrice" id="" value="${totalPrice * numberOfNights}">`
+                // console.log(totalPrice);
+
+                let message = '';
+                if (totalAdults < numberOfAdults) {
+                    message += '<b><span style="color: red;">' + (numberOfAdults - totalAdults) + ' người lớn chưa có phòng </span></b><br>';
+                }
+                if (totalChildrens < numberOfChilders) {
+                    message += '<b><span style="color: red;">' + (numberOfChilders - totalChildrens) + ' trẻ em chưa có phòng </span></b><br>';
+                }
+                let bookBtn = '';
+                if (!message) {
+                    bookBtn = '<button type="submit" class="btn btn-primary">Đặt những phòng này</button>';
+                    message = '<b><p style="color: green;">Bạn đã chọn đủ phòng cho mọi người!</p></b>';
+                }
+                message = '<div>' + message + '</div>'
+                let totalRoomsMessage = `<p>Bạn đã chọn:<span style="color: blue"><b> ${totalRooms} </b></span> phòng </p>`;
+                if (totalRooms == numberOfRooms) totalRoomsMessage = `<p>Bạn đã chọn:<span style="color: green"><b> ${totalRooms} </b></span> phòng <span style="color: green"><b> (Giống với yêu cầu) </b> </span> </p>`;
+
+                let sleepsMessage = `<div>${totalRoomsMessage}<p>Sức chứa tối đa: <i class="fa-solid fa-user"></i> x ${totalAdults}, <i class="fa-solid fa-child-reaching"></i> x ${totalChildrens}</p></div>`
+                html += `<div><h5><b>Thành tiền cho ${numberOfNights} đêm: ` + '<br />' + xulyTien(totalPrice * numberOfNights) + " VND</b></h5>" + bookBtn + "</div>"
+                html = message + sleepsMessage + html;
+                totalPriceElement.innerHTML = html;
+            }
+            for (let item of soLuongLuaChonPhongElements) {
+                // item.oninput = handleChangeQuantity;
+                item.onchange = handleChangeQuantity;
+            }
+        </script>
+        <script>
+            // xử lý tính tiền Chế Độ 2
+            // loại bỏ các option không thỏa mãn số lượng
+            let optionAdultQuantity = document.querySelectorAll('.rooms-list-2 .sleeps__adult');
+            let optionChildrenQuantity = document.querySelectorAll('.rooms-list-2 .sleeps__children');
+            let roomOptionElements_cd2 = document.querySelectorAll('.rooms-list-2 .room-option');
+            let watchOptionBtnElements = document.querySelectorAll('.rooms-list-2 .watch-option-btn');
+            let totalPrice2Element = document.querySelector('.total-price-2');
+            let roomOptionPrice2 = document.querySelectorAll('.rooms-list-2 .room-option-current-price')
+            let roomItem2Element = document.querySelectorAll('.rooms-list-2 .room-item');
+            // for (let i = 0; i < roomOptionElements_cd2.length; i++) {
+            //     if (numberOfRooms * +optionAdultQuantity[i].value < numberOfAdults)
+            //         roomOptionElements_cd2[i].style.display = 'none';
+            //     else if (numberOfRooms * +optionChildrenQuantity[i].value < numberOfChilders)
+            //         roomOptionElements_cd2[i].style.display = 'none';
+            // }
+
+
+            // xử lý hiển thị option của từng loại phòng thỏa mãn số lượng người cho trước
+            let emptyOption = true, idxOption = 0;
+            roomItem2Element.forEach((roomItem) => {
+                let roomOptionInsideRoomItem = roomItem.querySelectorAll('.room-option');
+                let ok = false;
+                for (let i = 0; i < roomOptionInsideRoomItem.length; i++) {
+                    if (numberOfRooms * +optionAdultQuantity[idxOption].value < numberOfAdults)
+                        roomOptionInsideRoomItem[i].style.display = 'none';
+                    else if (numberOfRooms * +optionChildrenQuantity[idxOption].value < numberOfChilders)
+                        roomOptionInsideRoomItem[i].style.display = 'none';
+                    else {
+                        ok = true;
+                        emptyOption = false;
+                    }
+                    idxOption++;
+                }
+                if (!ok) roomItem.style.display = 'none';
+                // nếu loại phòng đó không có option nào thỏa mãn thì cũng không hiển thị cả loại phòng đó 
+            })
+
+            if (emptyOption) {
+                let emptyOptionElement = document.querySelector('.rooms-list-2 .empty-option');
+                emptyOptionElement.innerHTML = '<p style="background-color: red; color: white; text-align: center">Không có phòng nào phù hợp với yêu cầu của bạn trong chế độ này<br> Vui lòng tìm trong các chế độ khác hoặc tìm các khách sạn khác</p>'
+            }
+
+            // xử lý watchOptionBtn: khi ấn vào thì tính tiền
+            // let luaChonPhongElements = document.querySelectorAll('.room-option')
+            for (let i = 0; i < watchOptionBtnElements.length; i++) {
+                watchOptionBtnElements[i].onclick = function () {
+                    let option = roomOptionElements_cd2[i];
+                    roomOptionElements_cd2.forEach((item) => {
+                        if (item != option) item.style.border = '1px solid #5392f9';
+                        let html = '';
+                        let message = '<b><span style="color: green;">Bạn đã chọn đủ phòng cho mọi người!</span></b><br>';
+
+                        let sleepsMessage = `<span>Sức chứa tối đa: <i class="fa-solid fa-user"></i> x ${numberOfRooms * +optionAdultQuantity[i].value},  <i class="fa-solid fa-child-reaching"></i> x ${numberOfRooms * +optionChildrenQuantity[i].value} </span> `
+
+                        bookBtn = '<button type="submit" class="btn btn-primary">Đặt những phòng này</button>';
+
+
+
+                        let idLP = roomOptionElements_cd2[i].classList[1]; // LP1, LP2, ...
+
+                        let inputHiddenLCP_cd2 = `<input hidden type="text" name="${roomOptionElements_cd2[i].classList[1]}" id="" value="${numberOfNights}">`
+                        let inputHiddenTotalPrice_cd2 = `<input hidden type="text" name="totalPrice" id="" value="${numberOfNights * numberOfRooms * +roomOptionPrice2[i].value}">`
+
+                        let priceMessage = `<div><b>Tổng giá tiền cho 1 đêm ${idLP}:</b><br> ${numberOfRooms} phòng X ${xulyTien(roomOptionPrice2[i].value)} VND/phòng = ${xulyTien(numberOfRooms * +roomOptionPrice2[i].value)} VND</div><div><h5><b>Thành tiền cho ${numberOfNights} đêm:<br> ${xulyTien(numberOfNights * numberOfRooms * +roomOptionPrice2[i].value)} VND</b></h5>${inputHiddenLCP_cd2} ${inputHiddenTotalPrice_cd2} ${bookBtn}</div> `
+
+                        totalPrice2Element.innerHTML = `<div>${message} ${sleepsMessage}</div>` + priceMessage;
+                    });
+                    if (option.style.border === '1px solid red') {
+                        option.style.border = '1px solid #5392f9';
+                        totalPrice2Element.innerHTML = "";
+                    }
+                    else {
+                        option.style.border = '1px solid red';
+                    }
+                }
+            }
+
+
+        </script>
+
+        <script>
+            // xử lý chọn chế độ chọn phòng
+            let cheDo1Element = document.querySelector('.che-do-1');
+            let cheDo2Element = document.querySelector('.che-do-2');
+            let roomsList1Element = document.querySelector('.rooms-list');
+            let roomsList2Element = document.querySelector('.rooms-list-2');
+
+            cheDo1Element.onclick = function () {
+                roomsList1Element.style.display = 'block';
+                totalPriceElement.style.display = 'flex';
+                totalPrice2Element.style.display = 'none';
+                if (cheDo1Element.classList.contains('btn-primary') == false) {
+                    cheDo1Element.classList.remove('btn-secondary');
+                    cheDo1Element.classList.add('btn-primary');
+
+                }
+
+
+                roomsList2Element.style.display = 'none';
+
+                if (cheDo2Element.classList.contains('btn-primary')) {
+                    cheDo2Element.classList.remove('btn-primary');
+                    cheDo2Element.classList.add('btn-secondary');
+                }
+
+
+            }
+
+
+
+            cheDo2Element.onclick = function () {
+                roomsList2Element.style.display = 'block';
+                totalPrice2Element.style.display = 'flex';
+                totalPriceElement.style.display = 'none';
+                if (cheDo2Element.classList.contains('btn-primary') == false) {
+                    cheDo2Element.classList.remove('btn-secondary');
+                    cheDo2Element.classList.add('btn-primary');
+                }
+
+
+                roomsList1Element.style.display = 'none';
+
+                if (cheDo1Element.classList.contains('btn-primary')) {
+                    cheDo1Element.classList.remove('btn-primary');
+                    cheDo1Element.classList.add('btn-secondary');
+                }
+            }
+
+        // let roomOptionElements_cd2 = document.querySelectorAll('.rooms-list-2 .room-option');
+
+        </script>
+
+
+
+        <script>
+            // xử lý loading modal
+            let loadingModal = document.querySelector('.loading-modal');
+            setTimeout(function () {
+                loadingModal.style.display = 'none';
+            }, 500)
+        </script>
+
+        <script>
+        // document.addEventListener("DOMContentLoaded", function (event) {
+        //     var scrollpos = localStorage.getItem('scrollpos');
+        //     if (scrollpos) window.scrollTo(scrollpos, scrollpos);
+        // });
+
+        // window.onbeforeunload = function (e) {
+        //     localStorage.setItem('scrollpos', window.scrollY);
+        // };
+        </script>
+
+
+        <script>
+            // Tìm best option - sử dụng thuật toán sinh (version 1)
+            // roomOptionElements_cd2
+            let roomOptionElements_cd1 = document.querySelectorAll('.rooms-list .room-option');
+            let roomOptionLength = roomOptionElements_cd1.length;
+            let bestOptionPriceBtn = document.querySelector('.best-option-price');
+            let roomItemElement = document.querySelectorAll('.rooms-list .room-item');
+
+            let bestOptionPriceList = document.querySelector('.best-option-price-list');
+            let bestOptionPriceBook = document.querySelector('.best-option-price-book');
+            let bestOptionPriceCost = document.querySelector('.best-option-price-book .min-cost');
+            let typeRoomNameElements = document.querySelectorAll('.type-room-name');
+
+            let optionAdultQuantity_cd1 = document.querySelectorAll('.rooms-list .sleeps__adult');
+            let optionChildrenQuantity_cd1 = document.querySelectorAll('.rooms-list .sleeps__children');
+            let soLuongConLaiCuaLCPElements = document.querySelectorAll('.rooms-list .soLuongConLaiCuaLCP')
+            let x = new Array(roomOptionLength + 5);
+            let res = new Array(roomOptionLength + 5);
+            let frequenceMark = new Array(roomOptionLength + 5);
+            x.fill(0);
+            res.fill(0);
+            frequenceMark.fill(0);
+            let minCost = 1000000000;
+
+            let soLuongConLaiCuaLCPArray = [];
+            Array.from(soLuongConLaiCuaLCPElements).forEach((item) => {
+                soLuongConLaiCuaLCPArray.push(+item.innerText.trim());
+            })
+            console.log("soLuongConLaiCuaLCPArray")
+            console.log(soLuongConLaiCuaLCPArray);
+            // xử lý find idLP
+            let findLP = [];
+            let roomItemCD1Elements_2 = document.querySelectorAll('.rooms-list .room-item');
+            let roomItemIdx = 0;
+            Array.from(roomItemCD1Elements_2).forEach((item) => {
+                let roomOptionCD1Elements_2 = item.querySelectorAll('.room-option');
+                for (let i = 0; i < roomOptionCD1Elements_2.length; i++) {
+                    findLP.push(roomItemIdx);
+                }
+                roomItemIdx++;
+            })
+            console.log("findLP")
+            console.log(findLP);
+
+            let cur_quantity_LP = new Array(soLuongConLaiCuaLCPArray.length);
+            cur_quantity_LP.fill(0);
+            function ql(i, bd, sum, adultNumber, childNumber) {
+                // console.log(i, bd, sum);
+                for (let j = bd; j < roomOptionLength; j++) {
+                    if (sum + +giaTienLuaChonPhongElements[j].value < minCost && cur_quantity_LP[findLP[j]] + 1 <= soLuongConLaiCuaLCPArray[findLP[j]]) {
+                        x[i] = j;
+                        cur_quantity_LP[findLP[j]]++;
+                        // console.log(i, j);
+                        if (adultNumber + +optionAdultQuantity_cd1[j].value >= +numberOfAdults &&
+                            childNumber + +optionChildrenQuantity_cd1[j].value >= +numberOfChilders) {
+                            minCost = sum + +giaTienLuaChonPhongElements[j].value;
+                            res.fill(0);
+                            for (let u = 1; u <= i; u++) {
+                                res[x[u]]++;
+                            }
+                            // console.log('>>>check')
+                            // console.log(res);
+                            // console.log(minCost);
+                        }
+                        ql(i + 1, j, sum + +giaTienLuaChonPhongElements[j].value, adultNumber + +optionAdultQuantity_cd1[j].value, childNumber + +optionChildrenQuantity_cd1[j].value);
+
+                        cur_quantity_LP[findLP[j]]--;
+                    }
+                }
+            }
+
+            ql(1, 0, 0, 0, 0);
+
+            // bestOptionPrice.innerText = bestOptionPrice.innerText + ' (' + res.reduce((sum, item) => sum + item) + ' phòng)';
+            // bestOptionPrice.onclick = function() {
+            //     for(let idLCP = 0; idLCP < roomOptionLength; idLCP++){
+            //         if(res[idLCP]){
+            //             roomOptionElements_cd1[idLCP].style.border = '1px solid red';
+            //             roomOptionElements_cd1[idLCP].querySelector('.room-option-quantity').value = res[idLCP];
+            //         }
+            //     }
+            //     handleChangeQuantity();
+            // }
+
+            // let bestOptionPriceHtml = document.createElement('div');
+            // bestOptionPriceListDiv2 = document.createElement('div');
+            let costMessage = '<p><b>Rẻ nhất cho 1 đêm:</b></p>';
+            console.log(res);
+            for (let idLCP = 0; idLCP < roomOptionLength; idLCP++) {
+                if (res[idLCP]) {
+                    // roomOptionElements_cd1[idLCP].querySelector('.room-option-quantity').value = res[idLCP];
+                    // roomOptionElements_cd1[idLCP]
+                    let tmp = document.createElement('div');
+                    let tmp2 = document.createElement('div');
+
+                    tmp2.classList.add('room-item__body');
+                    let typeRoomLable = document.createElement('p');
+                    typeRoomLable.innerHTML = `<b>${res[idLCP]} x ${typeRoomNameElements[idLCP].value}</b>`;
+                    tmp.appendChild(typeRoomLable);
+                    roomOptionElements_cd1[idLCP].querySelector('.room-option-quantity-text').innerText = res[idLCP];
+                    tmp.appendChild(roomOptionElements_cd1[idLCP].cloneNode(true));
+                    // trả lại kết quả bằng 0 cho số lượng phòng
+                    roomOptionElements_cd1[idLCP].querySelector('.room-option-quantity-text').innerText = 0;
+
+                    tmp2.appendChild(tmp);
+                    bestOptionPriceList.appendChild(tmp2);
+                    let exactly_id_LCP_in_DB = roomOptionElements_cd1[idLCP].classList[1];
+                    costMessage += `<p>${res[idLCP]} X ${+giaTienLuaChonPhongElements[idLCP].value} = ${res[idLCP] * +giaTienLuaChonPhongElements[idLCP].value}</p>`
+                    let inputHiddenLCP_bestOption = `<input hidden type="text" name="${exactly_id_LCP_in_DB}" id="" value="${res[idLCP]}">`
+                    costMessage += inputHiddenLCP_bestOption;
+                }
+            }
+            costMessage += `<p>Tổng: ${xulyTien(minCost)} VND</p>`;
+            costMessage += `<p><b>Thành tiền cho ${numberOfNights} đêm: ${xulyTien(numberOfNights * minCost)} VND</b></p>`
+            let inputHiddenTotalPrice_bestOption = `<input hidden type="text" name="totalPrice" id="" value="${numberOfNights * minCost}">`
+            costMessage += inputHiddenTotalPrice_bestOption;
+            let bestOptionBookBtn = '<button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 0;">Đặt tối ưu</button>'
+            bestOptionPriceCost.innerHTML = costMessage + bestOptionBookBtn;
+
+            let BestOptionQuantityBtn = document.querySelectorAll('.best-option-price-list .num-btn');
+            Array.from(BestOptionQuantityBtn).forEach((item) => {
+                item.style.display = 'none';
+            })
+            let bestOptionQuantityElements = document.querySelectorAll('.best-option-price-list .quantity')
+            bestOptionQuantityElements.forEach((item) => {
+                item.style.width = '60px';
+            })
+            let bestOptionQuantityTextElements = document.querySelectorAll('.best-option-price-list .quantity')
+            bestOptionQuantityTextElements.forEach((item) => {
+                item.style.textAlign = 'center';
+            })
+        </script>
+    </body>
+
+</html>

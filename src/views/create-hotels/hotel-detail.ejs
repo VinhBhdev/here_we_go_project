@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết khách sạn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/create-hotels/add-hotels.css">
+    <link rel="stylesheet" href="/css/site/user-info.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .crop {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .crop img {
+            width: 100%;
+            height: 300px;
+            /* margin: -75px 0 0 -100px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="main container" style="margin-top: 60px;">
+        <div class="crop">
+            <img src="<%=hotelInfo.linkAnh%>" alt="" width="100%">
+        </div>
+        <div class="hotel-info text-center mt-4">
+            <h3>
+                <%=hotelInfo.tenKS%>
+            </h3>
+            <%=hotelInfo.diaChiChiTiet%>
+                <br><br>
+        </div>
+        <h4>QUẢN LÝ LOẠI PHÒNG</h4>
+        <a href="/create-hotels/add-room-type/<%=hotelInfo.idKS%>"><button class="btn btn-primary mb-4">Thêm loại
+                phòng</button></a>
+        <div class="hotel-owner-list">
+
+            <%for(let room of hotelData) {%>
+                <div class="info-box room-type-item df">
+
+                    <div class="image-container f3">
+                        <img src="https://www.newzealand.com/assets/Operator-Database/img-1652959660-6127-25310-Alpine_Twin_IMG_1048__aWxvdmVrZWxseQo_CropResizeWzEyMDAsNjMwLDc1LCJqcGciXQ.JPG"
+                            style="width: 100%" alt="">
+
+                    </div>
+                    <div class="booking-info f8" style="padding-bottom: 10px;">
+                        <a href="/create-hotels/room-type-detail/<%= room.idLP%>" target="_blank">
+                            <h5 class="hotel-name">
+                                <%= room.tenLP%>
+                            </h5>
+                            <hr>
+                        </a>
+                        <span>Diện tích: <%= room.dienTich%>m2</span><br>
+                        <span>Hướng phòng: <%= room.huongPhong%></span><br>
+                        <span>Số lượng loại phòng: <%= room.soLuong%></span><br>
+                        <div class="">
+                            <div class="bed-info">
+                                giường đơn: <%= room.giuongDon%>
+                            </div>
+                            <div class="bed-info">
+                                giường đôi: <%= room.giuongDoi%>
+                            </div>
+                            <div class="bed-info">
+                                giường đôi lớn: <%= room.giuongDoiLon%>
+                            </div>
+                        </div>
+
+                        <br><br>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

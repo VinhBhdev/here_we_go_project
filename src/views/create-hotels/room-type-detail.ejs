@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết phòng nghỉ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="/css/hotel-detail/top-nav.css">
+    <link rel="stylesheet" href="/css/hotel-detail/style.css">
+    <link rel="stylesheet" href="/css/hotel-detail/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/hotel.css">
+    <link rel="stylesheet" href="/css/create-hotels/add-hotels.css">
+    <link rel="stylesheet" href="/css/site/user-info.css">
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4"
+                    style="height: 55px; margin-bottom: 8px; display: inline;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="main container" style="margin-top: 60px">
+
+        <div class="hotel-info">
+            <h3>
+                <%=roomTypeInfo.tenKS%>
+            </h3>
+            <%=roomTypeInfo.diaChiChiTiet%>
+                <br><br>
+        </div>
+        <div class="message-from-server-container" style="min-height: 50px">
+            <div class="message-from-server">
+
+                <%if(message) {%>
+                    <p class="alert alert-success" style="font-size: 16px; font-weight: 600;">
+                        <%= message%>
+                    </p>
+                    <% } %>
+            </div>
+        </div>
+        <div class="room-type-info" style="margin-bottom: 40px;">
+            <div class="info-box room-type-item df">
+
+                <div class="image-container" style="flex: 5">
+                    <img src="https://www.newzealand.com/assets/Operator-Database/img-1652959660-6127-25310-Alpine_Twin_IMG_1048__aWxvdmVrZWxseQo_CropResizeWzEyMDAsNjMwLDc1LCJqcGciXQ.JPG"
+                        style="width: 100%" alt="">
+
+                </div>
+                <div class="booking-info f8" style="padding-bottom: 10px;">
+                    <h5 class="hotel-name">
+                        <%= roomTypeInfo.tenLP%>
+                    </h5>
+                    <hr>
+                    </a>
+                    <span>Diện tích: <%= roomTypeInfo.dienTich%>m2</span><br>
+                    <span>Hướng phòng: <%= roomTypeInfo.huongPhong%></span><br>
+                    <span>Số lượng loại phòng: <b style="color: red">
+                            <%= roomTypeInfo.soLuong%>
+                        </b></span><br>
+                    <div class="">
+                        <div class="bed-info">
+                            Giường đơn: <%= roomTypeInfo.giuongDon%>
+                        </div>
+                        <div class="bed-info">
+                            Giường đôi: <%= roomTypeInfo.giuongDoi%>
+                        </div>
+                        <div class="bed-info">
+                            Giường đôi lớn: <%= roomTypeInfo.giuongDoiLon%>
+                        </div>
+                    </div>
+
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <h4>QUẢN LÝ LỰA CHỌN PHÒNG</h4>
+
+        <button class="btn btn-primary mb-4 add-room-option-link">Thêm lựa chọn phòng
+        </button>
+
+        <div class="add-room-option-form info-box">
+            <form method="POST" action="/create-hotels/post-add-room-option">
+                <input hidden type="text" name="idLP" id="" value="<%= roomTypeInfo.idLP%>">
+                <div class="form-group">
+                    <div class="df">
+                        <div class="f1">
+                            <label for="">
+                                <h6>Sức chứa người lớn</h6>
+                            </label>
+                            <input type="number" class="form-control" id="" name="sucChuaNguoiLon" min="1"
+                                value="0"><br>
+
+                        </div>
+                        <div class="f1">
+                            <label for="">
+                                <h6>Sức chứa trẻ em</h6>
+                            </label>
+                            <input type="number" class="form-control" id="" name="sucChuaTreEm" min="0" value="0"><br>
+
+                        </div>
+
+                    </div>
+                    <div class="df">
+                        <div class="f1">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">
+                                    <h6>Chính sách hủy phòng</h6>
+                                </label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="idCSHP">
+                                    <option value="1">Miễn phí hủy phòng</option>
+                                    <option value="2">Miễn phí hủy phòng trước 1 ngày</option>
+                                    <option value="3">Miễn phí hủy phòng trước 2 ngày</option>
+                                    <option value="4">Miễn phí hủy phòng trước 3 ngày</option>
+                                    <option value="5">Miễn phí hủy phòng trước 7 ngày</option>
+                                    <option value="6">Không hoàn tiền</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="f1">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">
+                                    <h6>Chính sách thanh toán</h6>
+                                </label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="idCSTT">
+
+                                    <option value="1">Thanh toán ngay</option>
+                                    <option value="2">Thanh toán tại nơi ở</option>
+                                    <option value="3">Thanh toán cho khách sạn</option>
+                                    <option value="4">Không phải thanh toán ngay, chỉ thanh toán trước khi nhận phòng 1
+                                        ngày</option>
+                                    <option value="5">Không phải thanh toán ngay, chỉ thanh toán trước khi nhận phòng 2
+                                        ngày</option>
+                                    <option value="6">Không phải thanh toán ngay, chỉ thanh toán trước khi nhận phòng 3
+                                        ngày</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-option">
+                        <h6>Lợi ích phòng ở dành cho lựa chọn phòng</h6>
+                        <input type="checkbox" id="benefit1" name="idLIPO" value="1">
+                        <label for="benefit1"> Miễn phí bữa sáng cho tất cả</label><br>
+                        <input type="checkbox" id="benefit2" name="idLIPO" value="2">
+                        <label for="benefit2"> Phòng tập</label><br>
+                        <input type="checkbox" id="benefit3" name="idLIPO" value="3">
+                        <label for="benefit3"> Nhận phòng nhanh</label><br>
+                        <input type="checkbox" id="benefit4" name="idLIPO" value="4">
+                        <label for="benefit4"> Nhận phòng trễ</label><br>
+                        <input type="checkbox" id="benefit5" name="idLIPO" value="5">
+                        <label for="benefit5"> Tặng voucher spa/xông hơi</label><br>
+                    </div>
+                    <br>
+                    <h6>Giá lựa chọn phòng cho một đêm</h6>
+                    <div class="df">
+                        <div class="f1">
+                            <label for="">Giá gốc (VND)</label>
+                            <input type="text" class="form-control" id="giaGoc" name="giaGoc" value="0"><br>
+
+                        </div>
+                        <div class="f1">
+                            <label for="">Ưu Đãi (%)</label>
+                            <input type="text" class="form-control" id="uuDai" name="uuDai" min="0" max="100"
+                                value="0"><br>
+                        </div>
+                        <div class="f1">
+                            <label for="">Khách trả (VND)</label>
+                            <input type="text" class="form-control" id="giaHienTai" name="" value="0" readonly><br>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
+            </form>
+        </div>
+        <div class="room-option-container mt-4">
+            <%for(let option of roomOptionInfo) {%>
+                <div class="room-item__body">
+                    <div class="room-option">
+
+                        <div class="benerfits" style="width: 300px;">
+                            <div class="title">
+                                <h6>Lợi ích</h6>
+                            </div>
+
+                            <div class="content">
+
+                                <%for(let benefit_item of option.loiIch) {%>
+                                    <span>
+                                        <%=benefit_item%>
+                                    </span><br>
+                                    <% } %>
+                            </div>
+                        </div>
+
+                        <div class="sleeps">
+                            <div class="title">
+                                <h6>Sức chứa</h6>
+                            </div>
+
+                            <div class="content">
+                                <i class="fa-solid fa-user"></i> x <span>
+                                    <%= option.sucChuaNguoiLon%>
+                                </span> <br>
+                                <i class="fa-solid fa-child-reaching"></i> x <span>
+                                    <%= option.sucChuaTreEm%>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="pay-cancel" style="width: 300px;">
+                            <div class="title">
+                                <h6>Thanh toán và hủy bỏ</h6>
+                            </div>
+
+                            <div class="content">
+                                <b>Hủy bỏ</b><br>
+                                <%=option.tenCSHP%>
+                                    <br><br>
+                                    <b>Thanh toán</b><br>
+                                    <%=option.tenCSTT%>
+
+                            </div>
+                        </div>
+                        <div class="price-per-night" style="width: 300px;">
+                            <div class="title">
+                                <h6>Giá phòng/đêm</h6>
+                            </div>
+
+                            <div class="content">
+                                <span class="room-option-old-price">
+                                    <%= option.giaGoc%> VND
+                                </span><br>
+                                <!-- Giá mới nhất: -->
+                                <span class="room-option-sale">Giảm giả
+                                    <%= option.uuDai%>%
+                                </span><br>
+
+
+                                <br><br><br>
+                                <div class="easy-looking-price">
+                                    <%= option.giaHienTai%> VND
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+        <!-- </div> -->
+    </div>
+    <script>
+        addFromLink = document.querySelector('.add-room-option-link');
+        addOptionForm = document.querySelector('.add-room-option-form');
+        addOptionForm.style.display = 'none';
+        addFromLink.onclick = function () {
+            addOptionForm.style.display = 'block';
+
+        }
+    </script>
+    <script>
+        // 
+        let messageFromServer = document.querySelector('.message-from-server');
+        setTimeout(() => {
+            messageFromServer.style.display = 'none';
+        }, 4000)
+    </script>
+    <script>
+        // xử lý tính toán số tiền phòng sau ưu đãi
+        let xulyTien = (s) => {
+            s = "" + s;
+            s = s.split(',').join('');
+            let res = '';
+            let cnt = 0;
+            for (let i = s.length - 1; i >= 0; i--) {
+                cnt++;
+                res += s[i];
+                if (cnt % 3 == 0 && i != 0) res += ',';
+            }
+            res = res.split("").reverse().join("");
+            return res;
+        }
+        function toNumber(s) {
+            return +s.split(",").join('')
+        }
+        let giaGocElement = document.querySelector('#giaGoc');
+        let uuDaiElement = document.querySelector('#uuDai');
+        let giaHienTaiElement = document.querySelector('#giaHienTai');
+
+        function tinhGiaTienHienTai() {
+            let result = (toNumber(giaGocElement.value) - toNumber(giaGocElement.value) * +uuDaiElement.value / 100).toFixed(0);
+            giaHienTaiElement.value = xulyTien(result);
+        }
+
+        giaGocElement.oninput = () => {
+            giaGocElement.value = xulyTien(giaGocElement.value);
+            tinhGiaTienHienTai();
+        }
+        uuDaiElement.oninput = () => {
+            tinhGiaTienHienTai();
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

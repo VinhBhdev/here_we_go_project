@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herewego Flights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/flights/flights-list/flights-list.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="nav">
+        <a href="/" style="text-decoration: none; color: black">
+            <div class="logo">
+                <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                HERE WE GO
+            </div>
+        </a>
+        <div class="user-profile">
+            <div class="" style="display: flex;">
+                <!-- <i class="ti-id-badge"></i> -->
+                <% if(userInfo) {%>
+
+                    <a href="/user-info" style="text-decoration: none; color: black">
+                        <div class="btn">
+                            <span style="font-size: 20px">
+                                <%= userInfo.user.username%>
+                            </span>
+                        </div>
+                    </a>
+                    <%} else {%>
+                        <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                        <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="short-inf">
+        <form action="/hotels/search" method="GET" class="inf-form">
+            <input type="text" placeholder="Dia diem..." name="city" id="place-search"
+                value="<%= searchInfo.departureFrom%>">
+            <input type="text" placeholder="Dia diem..." name="city" id="place-search"
+                value="<%= searchInfo.arrivalTo%>">
+            <div class="date-inf">
+                <input type="date" placeholder="Tu ngay..." name="" id="date-from" value="<%= searchInfo.returnDate%>">
+                <!-- <input type="date" hidden placeholder="Số đêm..." name="" id="nights" value=""> -->
+                <%if(searchInfo.returnDate && searchInfo.flightType==2) {%>
+                    <div class="" style="border-left: 3px solid #ccc;">
+                        <input type="date" placeholder="Den ngay..." name="" id="date-to"
+                            value="<%= searchInfo.departDate%>">
+                    </div>
+                    <% } %>
+            </div>
+            <div class="quantity">
+                <input type="text" placeholder="Số lượng" name="" id="quantity__person"
+                    value="<%= searchInfo.adults%> người lớn, <%= searchInfo.children%> trẻ em, <%= searchInfo.baby%> trẻ sơ sinh">
+            </div>
+            <div class="class-type-container">
+                <%if(searchInfo.classType==1) {%>
+                    <input type="text" name="" id="" value="Phổ thông">
+                    <% } else {%>
+                        <input type="text" name="" id="" value="Thương gia">
+                        <% } %>
+            </div>
+
+            <div class="">
+
+                <input type="submit" value="TÌM" class="search-btn">
+            </div>
+        </form>
+    </div>
+    <div class="main" style="margin-top: 170px; background-color: #fff;">
+        <div class="flights-nav">
+            <input hidden type="text" id="searchInfo" value="<%= JSON.stringify(searchInfo)%>">
+            <input type="text" hidden id="flightType" value="<%= searchInfo.flightType%>">
+            <input type="text" hidden id="departureFrom" value="<%= searchInfo.departureFrom%>">
+            <input type="text" hidden id="arrivalTo" value="<%= searchInfo.arrivalTo%>">
+            <input type="text" hidden id="departDate" value="<%= searchInfo.departDate%>">
+            <input type="text" hidden id="returnDate" value="<%= searchInfo.returnDate%>">
+            <input type="text" hidden id="adults" value="<%= searchInfo.adults%>">
+            <input type="text" hidden id="children" value="<%= searchInfo.children%>">
+            <input type="text" hidden id="baby" value="<%= searchInfo.baby%>">
+            <input type="text" hidden id="classType" value="<%= searchInfo.classType%>">
+
+        </div>
+        <div class="container" style="padding-left: 280px">
+            <h4>Chuyến bay trở về: <%= searchInfo.departureFrom%> <i class="fa-solid fa-arrow-right"></i>
+                    <%= searchInfo.arrivalTo%>
+            </h4>
+        </div>
+        <div class="flights-list-body container">
+            <div class="flights-filter">
+                <div class="trip-time-filter">
+                    <div class="title">Lịch trình</div>
+                    <div class="departure-time-filter">
+                        Khởi hành từ <%= searchInfo.departureFrom%>
+                            <div class="form-group">
+                                <div class="" style="display: flex;">
+                                    <div class="" style="margin-right: 10px; border-right: 1px dotted black">
+                                        <label for="">Từ</label><br>
+                                        <input type="time" name="" id="" class="depart-time-begin">
+                                    </div>
+                                    <div class="">
+                                        <label for="">Đến</label><br>
+                                        <input type="time" name="" id="" class="depart-time-end">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                    </div>
+                    <div class="arrival-time-filter">
+                        Đến <%= searchInfo.arrivalTo%>
+                            <div class="form-group">
+                                <div class="" style="display: flex;">
+                                    <div class="" style="margin-right: 10px; border-right: 1px dotted black">
+                                        <label for="">Từ</label><br>
+                                        <input type="time" name="" id="" class="arrival-time-begin">
+                                    </div>
+                                    <div class="">
+                                        <label for="">Đến</label><br>
+                                        <input type="time" name="" id="" class="arrival-time-end">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="airlines-filter">
+                    <div class="title">Hãng hàng không</div>
+                    <input type="checkbox" id="airline1" name="airline1" value="1">
+                    <label for="airline1"> Vietnam Airlines</label><br>
+                    <input type="checkbox" id="airline2" name="airline2" value="2">
+                    <label for="airline2"> Vietjet Air</label><br>
+                    <input type="checkbox" id="airline3" name="airline3" value="3">
+                    <label for="airline3"> Bamboo Airways </label><br>
+                </div>
+                <hr>
+                <div class="stopover-filter">
+                    <div class="title">Điểm dừng</div>
+                    <input type="checkbox" id="stopover1" name="stopover1" value="0">
+                    <label for="stopover1"> Bay Thẳng</label><br>
+                    <input type="checkbox" id="stopover2" name="stopover2" value="1">
+                    <label for="stopover2"> 1 Điểm Dừng</label><br>
+                    <input type="checkbox" id="stopover3" name="stopover3" value="2">
+                    <label for="stopover3"> >2 Điểm Dừng </label><br>
+                </div>
+                <hr>
+                <div class="price-filter">
+                    <div class="title">Giá</div>
+                    <div class="form-group">
+                        <input type="range" class="form-control-range" name="price-filter" id="formControlRange"
+                            value="100">
+                        <label for="formControlRange">Lên đến 10,000,000 ₫</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="flight-time-filter">
+                    <div class="title">Thời gian</div>
+                    <div class="form-group">
+
+                        <input type="range" class="form-control-range" id="formControlRange" value="100">
+                        <label for="formControlRange">Dưới 26 tiếng</label>
+                    </div>
+                </div>
+                <button class="btn btn-secondary remove-filter">Xóa bộ lọc</button>
+
+            </div>
+            <div class="flights-list">
+                <div class="flight-list-header">
+                    <div class="flight-list-header">
+                        <div class="info-box df sort-section">
+                            <div class="f1" style="padding: 20px;"><i>Sắp xếp</i></div>
+                            <div class="f2-sort">Rẻ nhất
+                                <input hidden type="text" name="" id="" value="1">
+                            </div>
+                            <div class="f2-sort">Nhanh nhất
+                                <input hidden type="text" name="" id="" value="2">
+                            </div>
+                            <div class="f2-sort">Tổng thể tốt nhất
+                                <input hidden type="text" name="" id="" value="3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flights-list-content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascript/flights/flights-list-return.js"></script>
+    <script src="/javascript/flights/handleEventsFlightsList.js"></script>
+    <script src="/javascript/flights/returnTickets.js"></script>
+
+    <script>
+        // xử lý xem chi tiết vé máy bay
+
+    </script>
+
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

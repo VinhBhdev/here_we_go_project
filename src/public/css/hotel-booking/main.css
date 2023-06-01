@@ -1,0 +1,154 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --greenColor: #32a923;
+    --mainColor: #5392f9;
+}
+
+.booking-section {
+    min-height: 50px;
+    display: flex;
+}
+
+.user-infomation {
+    flex: 7;
+    margin-right: 20px;
+    margin-top: 50px;
+
+}
+
+.hotel-and-price-infomartion {
+    flex: 3;
+    margin-top: 50px;
+}
+
+
+.user-contact {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+}
+
+.payment-detail input,
+.payment-detail select,
+.user-contact input {
+    border: 1px solid var(--greenColor);
+    border-radius: 5px;
+    padding: 4px 12px;
+    width: 100%;
+}
+
+
+.payment-detail,
+.special-user-request {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 50px;
+    padding: 20px;
+}
+
+
+.card-information__title,
+.contact-section-title,
+.special-user-request .request-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.payment-detail {
+    display: flex;
+}
+
+.card-information {
+    width: 50%;
+}
+
+.payment-detail .card-img {
+    margin-top: 50px;
+    width: 50%;
+    text-align: right;
+}
+
+.payment-detail .card-img img {
+    width: 90%;
+}
+
+.booking-btn {
+    margin-top: 30px;
+    font-size: 18px;
+    padding: 10px 25px;
+}
+
+.hotel-name {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.hotel-star {
+    color: orange
+}
+
+.hotel-address {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 300;
+    font-family: kite-mallory, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.pay-information,
+.room-information,
+.hotel-information {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+}
+
+.hotel-point {
+    margin-top: 10px;
+    display: flex;
+}
+
+.point-bg {
+    background-color: var(--mainColor);
+    border-radius: 35%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.point-desc {
+    color: var(--mainColor);
+    font-weight: 500;
+}
+
+.pay-information,
+.room-information {
+    margin-top: 10px;
+}
+
+.tax-and-service-fee,
+.repay {
+    font-size: 12px;
+    line-height: 21px;
+}
+
+.user-pay-include-tax {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price {
+    display: flex;
+    justify-content: space-between;
+}

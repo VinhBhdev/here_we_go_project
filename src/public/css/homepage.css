@@ -1,0 +1,149 @@
+#home-page {
+    margin-top: 60px;
+    background: linear-gradient(rgba(0, 100, 255, 0.5), rgba(10, 0, 255, 0.5), rgba(83, 146, 249, .5));
+    padding-bottom: 60px;
+    min-height: 2000px;
+}
+
+.welcome-text {
+    font-size: 40px;
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+#home-page .content-section {
+    width: 86%;
+    margin: 0 auto;
+}
+
+.content-section .nav {
+    height: 88px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 5px;
+    z-index: 1;
+}
+
+.nav .nav-item {
+    text-align: center;
+    font-size: 24px;
+    color: #000;
+    padding: 8px;
+}
+
+.nav .nav-item:hover {
+    border-bottom: 3px solid rgb(83, 146, 249);
+    cursor: pointer;
+    color: rgb(83, 146, 249);
+}
+
+.nav .nav-icon {
+    font-size: 36px;
+}
+
+.content-section .inf {
+    width: 80%;
+    background-color: white;
+    height: 450px;
+    margin: 5px auto;
+    box-shadow: 0 0 inset;
+    padding: 16px 32px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    min-height: 1000px;
+}
+
+.inf #place-search {
+    height: 64px;
+    padding-left: 16px;
+    font-size: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 64px;
+    margin-bottom: 16px;
+}
+
+.inf .date-inf {
+    height: 64px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-inf input {
+    border-radius: 3px;
+    padding-left: 16px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    width: 50%;
+}
+
+.quantity {
+    display: flex;
+    justify-content: space-around;
+}
+
+.quantity input {
+    height: 64px;
+    border-radius: 3px;
+    padding-left: 16px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    width: 50px;
+    margin-top: 16px;
+}
+
+.quantity label {
+    font-size: 18px;
+}
+
+.inf .search-btn {
+    display: block;
+    width: 70%;
+    height: 60px;
+    margin: 50px auto;
+    background-color: rgb(83, 146, 249);
+    color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+.flights-form {
+    margin-top: 30px;
+}
+
+.date-and-quantity-container {
+    display: flex;
+    margin-top: 30px;
+}
+
+.date-and-quantity-container .date-container,
+.date-and-quantity-container .quantity {
+    flex: 1;
+}
+
+.date-and-quantity-container .quantity {
+    padding-left: 20px;
+    display: block;
+}
+
+.date-and-quantity-container .quantity label {
+    font-size: 15px;
+}
+
+.date-and-quantity-container .quantity .quantity-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.quantity-item input {
+    margin: 0;
+    width: 80px;
+    height: 30px;
+}

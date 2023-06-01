@@ -1,0 +1,12 @@
+.df {
+    display: flex;
+}
+
+.f1 {
+    flex: 1
+}
+
+.df2 {
+    display: flex;
+    justify-content: space-between;
+}

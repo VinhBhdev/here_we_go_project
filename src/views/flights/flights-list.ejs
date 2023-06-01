@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herewego Flights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/flights/flights-list/flights-list.css">
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="flights-list-body container">
+            <div class="flights-filter">
+                <div class="trip-time-filter">
+                    <div class="title">Lịch trình</div>
+                    <div class="departure-time-filter">
+                        Khởi hành từ Hà Nội (HAN)
+                        <div class="form-group">
+
+                            <input type="range" class="form-control-range" id="formControlRange" value="0">
+                            <label for="formControlRange">Từ 00:00 đến 24:00</label>
+                        </div>
+                    </div>
+                    <div class="arrival-time-filter">
+                        Đến Da Nang (DAD)
+                        <div class="form-group">
+
+                            <input type="range" class="form-control-range" id="formControlRange" value="0">
+                            <label for="formControlRange">Từ 00:00 đến 24:00</label>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="airlines-filter">
+                    <div class="title">Hãng hàng không</div>
+                    <input type="checkbox" id="airline1" name="airline1" value="1">
+                    <label for="airline1"> Vietnam Airlines</label><br>
+                    <input type="checkbox" id="airline2" name="airline2" value="2">
+                    <label for="airline2"> Vietjet Air</label><br>
+                    <input type="checkbox" id="airline3" name="airline3" value="3">
+                    <label for="airline3"> Bamboo Airways </label><br>
+                </div>
+                <hr>
+                <div class="stopover-filter">
+                    <div class="title">Điểm dừng</div>
+                    <input type="checkbox" id="stopover1" name="stopover1" value="0">
+                    <label for="0"> Bay Thẳng</label><br>
+                    <input type="checkbox" id="stopover2" name="stopover2" value="1">
+                    <label for="airline2"> 1 Điểm Dừng</label><br>
+                    <input type="checkbox" id="stopover3" name="stopover3" value="2">
+                    <label for="airline3"> >2 Điểm Dừng </label><br>
+                </div>
+                <hr>
+                <div class="price-filter">
+                    <div class="title">Giá</div>
+                    <div class="form-group">
+                        <input type="range" class="form-control-range" name="price-filter" id="formControlRange"
+                            value="100">
+                        <label for="formControlRange">Lên đến 14,000,000 ₫</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="flight-time-filter">
+                    <div class="title">Thời gian</div>
+                    <div class="form-group">
+
+                        <input type="range" class="form-control-range" id="formControlRange" value="100">
+                        <label for="formControlRange">Dưới 26 tiếng</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="flights-list">
+                <div class="flight-list-header"></div>
+                <div class="flights-list-content">
+                    <!-- <div class="flight-item-container">
+                        <div class="flight-item">
+
+                            <div class="flight-item__airlines">
+                                Vietnam Airlines
+                            </div>
+                            <div class="flight-item__info">
+                                <div class="depart">
+                                    <span class="depart-time">06:55</span>
+                                    <div class="depart-place">Hà Nội</div>
+                                </div>
+                                <div class="diff-time">
+                                    <div class="">
+                                        <i class="fa-solid fa-plane-departure"></i>
+                                        <span>--------------</span>
+                                        <i class="fa-solid fa-plane-arrival"></i>
+                                    </div>
+                                    <p>1h 15ph (Bay thẳng)</p>
+                                </div>
+                                <div class="arrival">
+                                    <span class="arrival-time">08:10</span>
+                                    <div class="arrival-place">Đà Nẵng</div>
+                                </div>
+                            </div>
+                            <div class="flight-item__price">
+                                <div class="price-container">
+                                    <span class="sale">GIẢM 62.087,00 ₫</span>
+                                    <div class="old-price">1.034.784,00 ₫</div>
+                                    <div class="current-price">972.696,00 ₫</div>
+                                    <div class="price-desc">Giá trung bình mỗi hành khách</div>
+                                    <button class="btn btn-info mt-2">CHỌN</button>
+                                    <div class="flight-detail-link">Xem chi tiết</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flight-detail" style="display: none;">
+                            <hr>
+                            <div class="flight-detail-time">
+                                <div class="depart-time-2">06:55</div>
+                                <div class="arrival-time-2">08:10</div>
+                            </div>
+                            <div class="flight-detail-info">
+                                <p class="airport depart-airport">Sân bay Quốc tế Nội Bài (HAN)</p>
+                                <div class="airline-name">Vietnam Airlines</div>
+                                <div class="airline-id">VN 6077</div>
+                                <div class="class-type">Hạng phổ thông</div>
+                                <div class="plane-detail">
+                                    <span>A320 Máy bay phản lực thân hẹp</span><br>
+                                    <span>Sẵn có đồ uống có cồn (Trả phí)</span><br>
+                                    <span>Sẵn có đồ ăn nhẹ (Trả phí)</span><br>
+                                    <span>Cách bố trí 3-3</span><br>
+                                </div>
+                                <br>
+                                <p class="airport arrival-airport">Sân bay Quốc tế Đà Nẵng (DAD)</p>
+                            </div>
+
+                        </div>
+                    </div> -->
+                    <% for (let item of ticketsList) { %>
+                        <div class="flight-item-container">
+                            <div class="flight-item">
+
+                                <div class="flight-item__airlines">
+                                    <%= item.tenHHK%>
+                                </div>
+                                <div class="flight-item__info">
+                                    <div class="depart">
+                                        <span class="depart-time">
+                                            <%= item.thoiGianCatCanh.gioCatCanh%>
+                                        </span>
+                                        <div class="depart-place">
+                                            <%= searchInfo.departureFrom%>
+                                        </div>
+                                    </div>
+                                    <div class="diff-time">
+                                        <div class="">
+                                            <p style="text-align: center; margin-bottom: -2px">
+                                                <%= item.khoangThoiGian%>
+                                            </p>
+                                            <i class="fa-solid fa-plane-departure"></i>
+                                            <span>--------------</span>
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <% if(item.soDiemDung==0){ %>
+                                            <p style="text-align: center; font-size: 14px;">
+                                                Bay thẳng
+                                            </p>
+                                            <% } else { %>
+                                                <p style="text-align: center; font-size: 14px;">
+                                                    <%=item.soDiemDung%> điểm dừng
+                                                </p>
+                                                <% } %>
+                                    </div>
+                                    <div class="arrival">
+                                        <span class="arrival-time">
+                                            <%= item.thoiGianHaCanh.gioHaCanh%>
+                                        </span>
+                                        <div class="arrival-place">
+                                            <%= searchInfo.arrivalTo %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flight-item__price">
+                                    <div class="price-container">
+                                        <span class="sale">GIẢM <%=item.giaVe[0].uuDai %> ₫</span>
+                                        <div class="old-price">
+                                            <%=item.giaVe[0].giaGoc%> ₫
+                                        </div>
+                                        <div class="current-price">
+                                            <%=item.giaVe[0].giaHienTai%> ₫
+                                        </div>
+                                        <button class="btn btn-info mt-2">CHỌN</button>
+                                        <!-- <div class="flight-detail-link">Xem chi tiết</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flight-detail-link-container">
+                                <div class="delail-links">
+                                    <span class="flight-detail-link">Xem chi tiết</span>
+                                    <span class="flight-detail-link">Giá tiền và chính sách</span>
+                                    <span class="flight-detail-link">Hoàn tiền</span>
+                                    <span class="flight-detail-link">Đổi lịch</span>
+                                </div>
+
+                                <span class="close-all-links">
+                                    Thu gọn
+                                    <i class="fa-solid fa-caret-up"></i>
+
+                                </span>
+                                <span class="open-all-links">
+                                    Mở rộng
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="flight-detail flight-detail-1">
+                                <hr>
+                                <div class="flight-detail-time">
+                                    <div class="depart-time-2">
+                                        <%= item.thoiGianCatCanh.gioCatCanh%><br>
+                                            <%= item.thoiGianCatCanh.ngayCatCanh%>
+                                    </div>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <div class="time-diff" style="opacity: 0.7; font-size: 12px">
+                                        <%= item.khoangThoiGian%>
+                                    </div>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <span style="opacity: 0.4;">|</span>
+                                    <div class="arrival-time-2">
+                                        <%= item.thoiGianHaCanh.gioHaCanh%><br>
+                                            <%= item.thoiGianHaCanh.ngayHaCanh%>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="flight-detail-info">
+                                    <p class="airport depart-airport">Sân bay Quốc tế Nội Bài (HAN)</p>
+                                    <div class="airline-name">Vietnam Airlines</div>
+                                    <div class="airline-id">VN 6077</div>
+                                    <div class="class-type">Hạng phổ thông</div>
+                                    <div class="plane-detail">
+                                        <span>A320 Máy bay phản lực thân hẹp</span><br>
+                                        <span>Sẵn có đồ uống có cồn (Trả phí)</span><br>
+                                        <span>Sẵn có đồ ăn nhẹ (Trả phí)</span><br>
+                                        <span>Cách bố trí 3-3</span><br>
+                                    </div>
+                                    <br>
+                                    <p class="airport arrival-airport">Sân bay Quốc tế Đà Nẵng (DAD)</p>
+                                </div>
+                            </div>
+                            <div class="flight-detail flight-detail-2">
+                                <div class="condition">
+                                    <div class="title">Điều kiện</div>
+                                    <p>Hà Nội -> Đà Nẵng</p>
+                                    <span>Khuyến mại</span>
+
+                                    <div class="policy">
+                                        <div class="return-ticket"><i class="fa-regular fa-thumbs-up"></i> Được hoàn vé
+                                        </div>
+                                        <div class="reschedule"><i class="fa-regular fa-thumbs-up"></i> Đổi lịch có sẵn
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="price-detail">
+                                    <div class="title">Chi tiết giá</div>
+
+                                    <div class="price-calculate">
+                                        <div class="people-price-row">
+                                            <span>Vé người lớn cơ bản (x<%= searchInfo.adults%>)</span>
+                                            <span>
+                                                <%= item.giaVe[0].tongGia%> VND
+                                            </span>
+                                        </div>
+                                        <div class="people-price-row">
+                                            <span>Vé trẻ em cơ bản (x<%= searchInfo.children%>)</span>
+                                            <span>
+                                                <%= item.giaVe[1].tongGia%> VND
+                                            </span>
+                                        </div>
+                                        <div class="people-price-row">
+                                            <span>Vé trẻ sơ sinh cơ bản (x<%= searchInfo.baby%>)</span>
+                                            <span>
+                                                <%= item.giaVe[2].tongGia%> VND
+                                            </span>
+                                        </div>
+                                        <div class="tax grey-color">
+                                            <span>Thuế</span>
+                                            <span>Đã bao gồm</span>
+                                        </div>
+                                        <hr>
+                                        <div class="total-price .grey-color">
+                                            <b>Bạn trả</b>
+                                            <b>
+                                                <%= item.userPay%> VND
+                                            </b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flight-detail flight-detail-3 refund-container">
+                                <div class="refund-sub-nav">
+                                    <div class="refund-item-title">Chính sách hoàn tiền của bạn</div>
+                                    <div class="refund-item-title">Ước tính tiền hoàn lại</div>
+                                    <div class="refund-item-title">Quy trình hoàn lại vé</div>
+                                    <div class="refund-item-title">Thông tin hoàn lại tiền khác</div>
+                                </div>
+                                <div class="refund-content">
+                                    <div class="title">Chính sách</div>
+                                    <div class="refund-detail">
+                                        <span>Vietravel Airlines</span><br>
+                                        <span class="grey-color">Hà Nội → Đà Nẵng</span>
+                                        <div class="refund-result">
+                                            <i class="fa-solid fa-circle-check"></i> Có thể hoàn vé
+                                        </div>
+                                        <ul class="refund-reason">
+                                            Hoàn lại tiền được áp dụng vì (các) lý do sau:
+                                            <li>
+                                                Tự hủy (thay đổi kế hoạch)</li>
+                                            <li>
+                                                Đau ốm (bao gồm dương tính với COVID-19)</li>
+                                            <li>
+                                                Bất khả kháng</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flight-detail flight-detail-4 reschedule-container">
+                                <div class="reschedule-header">
+                                    <p>Vietnam Airlines</p>
+                                    <span class="grey-color">Hà Nội → Đà Nẵng</span>
+                                    <div class="reschedule-result">
+                                        <i class="fa-solid fa-circle-check"></i> Có áp dụng đổi lịch bay
+                                    </div>
+                                </div>
+
+                                <div class="reschedule-body">
+                                    <div class="reschedule-sub-nav">
+                                        <div class="reschedule-title">Chính sách Chung về Đổi lịch Thường xuyên</div>
+                                        <div class="reschedule-title">Thời hạn đổi lịch bay</div>
+                                        <div class="reschedule-title">Phí đổi lịch bay</div>
+                                        <div class="reschedule-title">Đổi lịch trình</div>
+                                    </div>
+                                    <div class="reschedule-content">
+                                        <div class="title">Chính sách</div>
+                                        <p class="grey-color">Nếu bạn đổi lịch chuyến bay, bạn sẽ có thể thay đổi:</p>
+                                        <div class="reschedule-option">
+                                            <div class="reschedule-item">
+                                                <i class="fa-solid fa-check success-color"></i>
+                                                <span>Giờ khởi hành</span>
+                                            </div>
+                                            <div class="reschedule-item">
+                                                <i class="fa-sharp fa-solid fa-xmark"></i>
+                                                <span>Lộ trình di chuyển</span>
+                                            </div>
+                                            <div class="reschedule-item">
+                                                <i class="fa-sharp fa-solid fa-xmark"></i>
+                                                <span>Hãng hàng không</span>
+                                            </div>
+                                        </div>
+                                        <ul class="reschedule-policy grey-color">
+
+                                            <li>Easy Reschedule chỉ áp dụng để đổi ngày bay.</li>
+                                            <li>Traveloka sẽ thông báo tổng giá tiền chuyến bay mới của bạn qua email,
+                                                thông
+                                                báo đẩy, hoặc Hộp thư của tôi trên ứng dụng Traveloka.</li>
+                                            <li>Tiến trình đổi lịch bay có thể lên đến 1 giờ.</li>
+                                            <li>Đổi lịch bay phải được áp dụng với tất cả chuyến bay với cùng một mã đặt
+                                                chỗ
+                                                trên hệ thống hãng (PNR).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <% } %>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const numberOfDetail = 4;
+        let flightDetailElements = document.querySelectorAll('.flight-detail');
+        let flightDetailLinks = document.querySelectorAll('.flight-detail-link');
+        let closeAllLinksElements = document.querySelectorAll('.close-all-links');
+        let openAllLinksElements = document.querySelectorAll('.open-all-links');
+        for (let item of flightDetailElements) {
+            item.style.display = "none";
+        }
+        for (let item of closeAllLinksElements) {
+            item.style.display = "none";
+        }
+        flightDetailLinks.forEach((item, index) => {
+            item.onclick = function () {
+                let st = parseInt(index / numberOfDetail) * numberOfDetail;
+                let ed = parseInt(index / numberOfDetail + 1) * numberOfDetail;
+                for (let i = st; i < ed; i++) {
+                    flightDetailElements[i].style.display = "none";
+                    flightDetailLinks[i].style.border = "none";
+                }
+                if (index % 4 != 3)
+                    flightDetailElements[index].style.display = "flex";
+                else
+                    flightDetailElements[index].style.display = "block";
+                flightDetailLinks[index].style.borderBottom = "3px solid rgb(1, 148, 243)";
+                openAllLinksElements[parseInt(index / numberOfDetail)].style.display = "none";
+                closeAllLinksElements[parseInt(index / numberOfDetail)].style.display = "block";
+            }
+        })
+        openAllLinksElements.forEach((item, index) => {
+            item.onclick = function () {
+                let i = index * numberOfDetail;
+                flightDetailElements[i].style.display = "flex";
+                openAllLinksElements[index].style.display = "none";
+                closeAllLinksElements[index].style.display = "block";
+            }
+        })
+        closeAllLinksElements.forEach((item, index) => {
+            item.onclick = function () {
+                let st = index * numberOfDetail;
+                let ed = (index + 1) * numberOfDetail;
+                for (let i = st; i < ed; i++) {
+                    flightDetailElements[i].style.display = "none";
+                }
+                closeAllLinksElements[index].style.display = "none";
+                openAllLinksElements[index].style.display = "block";
+            }
+        })
+
+
+
+    </script>
+
+
+    <!-- <script>
+        let flightDetailBtns = document.querySelectorAll('.flight-detail-link');
+        let flightDetailElements = document.querySelectorAll('.flight-detail');
+        for (let i = 0; i < flightDetailBtns.length; i++) {
+            let flightDetailBtn = flightDetailBtns[i];
+            flightDetailBtn.onclick = () => {
+                flightDetailElement = flightDetailElements[i];
+                if (flightDetailElement.style.display === "none") {
+                    flightDetailElement.style.display = "flex";
+                    flightDetailBtn.innerHTML = 'Thu gọn'
+                }
+                else {
+                    flightDetailBtn.innerHTML = 'Xem chi tiết'
+                    flightDetailElement.style.display = "none";
+                }
+            }
+        }
+
+    </script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

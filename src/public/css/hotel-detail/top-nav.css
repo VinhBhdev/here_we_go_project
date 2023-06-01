@@ -1,0 +1,40 @@
+.short-inf {
+    margin-top: 60px;
+    width: 100%;
+    height: 60px;
+    background-color: #20274d;
+    
+}
+
+.short-inf .inf-form {
+    display: flex;
+    padding-top: 6px;
+    justify-content: space-evenly;
+}
+
+
+
+.date-inf {
+    display: flex;
+}
+
+.inf-form #place-search,
+.date-inf #date-from,
+.quantity #quantity__person,
+.date-inf  #date-to {
+    padding-left: 12px;
+    height: 48px;
+    width: 260px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.inf-form .search-btn {
+    height: 48px;
+    width: 150px;
+    border-radius: 5px;
+    background-color: rgb(83, 146, 249);
+    color: white;
+    font-size: 20px;
+}
+

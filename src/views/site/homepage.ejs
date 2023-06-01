@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herewego</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/font/themify-icons/themify-icons.css">
+    <!-- <link rel="stylesheet" href="/font/fontawesome-free-6.3.0-web/css/fontawesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/f0add9272d.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="nav">
+            <a href="/" style="text-decoration: none; color: black">
+                <div class="logo">
+                    <img src="/image/site/logo-2.png" alt="" class="ml-4" style="height: 55px; margin-bottom: 8px;">
+                    HERE WE GO
+                </div>
+            </a>
+            <div class="user-profile">
+                <div class="" style="display: flex;">
+                    <!-- <i class="ti-id-badge"></i> -->
+                    <% if(userInfo) {%>
+
+                        <a href="/user-info" style="text-decoration: none; color: black">
+                            <div class="btn">
+                                <span style="font-size: 20px">
+                                    <%= userInfo.user.username%>
+                                </span>
+                            </div>
+                        </a>
+                        <%} else {%>
+                            <a href="/signin" style="color: #000; font-size: 16px; margin-right: 15px">Đăng nhập</a>
+                            <a href="/signup" style="color: #000; font-size: 16px">Đăng ký</a>
+
+                            <%}%>
+                </div>
+            </div>
+        </div>
+        <div id="home-page">
+            <p class="welcome-text" style="text-transform: uppercase;">
+                <% if(userInfo) {%>
+                    MỪNG <%= userInfo.user.first_name + " " + userInfo.user.last_name%> TRỞ LẠI!
+                        <%} %>
+            </p>
+            <div class="content-section">
+                <div class="nav">
+                    <div class="nav-item hotels-form-link mb-4">
+                        <!-- <i class="nav-icon ti-home"></i> -->
+                        <i class="fa-solid fa-house"></i><br>
+                        <span>Khách sạn & Nhà</span>
+                    </div>
+
+                    <div class="nav-item mb-4">
+                        <!-- <i class="nav-icon ti-home"></i> -->
+                        <i class="fa-solid fa-paper-plane"></i><br>
+                        <span>Chuyến bay + K.sạn</span>
+                    </div>
+
+                    <div class="nav-item flights-form-link mb-4">
+                        <!-- <i class="nav-icon ti-home"></i> -->
+                        <i class="fa-solid fa-plane-departure"></i><br>
+                        <span>Chuyến bay</span>
+                    </div>
+
+                    <div class="nav-item mb-4">
+                        <!-- <i class="nav-icon ti-home"></i> -->
+                        <i class="fa-solid fa-umbrella-beach"></i><br>
+                        <span>Hoạt động</span>
+                    </div>
+
+                </div>
+                <form method="GET" action="/hotels/search" class="inf hotels-form">
+                    <!-- <label for="">Địa điểm</label> -->
+                    <input type="text" placeholder="Dia diem..." name="city" id="place-search">
+                    <div class="date-inf">
+                        <input type="date" placeholder="Tu ngay..." name="" id="date-from">
+                        <input type="date" placeholder="Den ngay..." name="" id="date-to">
+                        <input hidden type="datetime" placeholder="Tu ngay..." name="checkIn" id="date1">
+                        <input hidden type="datetime" placeholder="Den ngay..." name="checkOut" id="date2">
+                    </div>
+                    <div class="quantity">
+                        <div class="">
+                            <label for="">Số lượng người lớn</label>
+                            <input type="number" placeholder="" name="adults" id="quantity__person" min="1" value="1">
+                        </div>
+                        <div class="">
+                            <label for="">Số lượng trẻ em</label>
+                            <input type="number" placeholder="" name="children" id="quantity__child" min="0" value="0">
+                        </div>
+                        <div class="">
+                            <label for="">Số lượng phòng</label>
+
+                            <input type="number" placeholder="" name="rooms" id="quantity__room" min="1" s max="10"
+                                value="1">
+                        </div>
+
+                    </div>
+
+                    <div class="childages-container"></div>
+                    <input type="submit" value="TÌM" class="search-btn">
+                </form>
+
+
+                <form method="GET" action="/flights/search" class="inf flights-form">
+                    <!-- <label for="">Địa điểm</label> -->
+                    <select class="custom-select flight-type
+                    flight-type" name="flightType" style="width: 20%;">
+                        <option value="1">Một chiều</option>
+                        <option value="2">Khứ hồi</option>
+                    </select>
+                    <div class="form-row mt-4">
+                        <div class="col">
+                            <input type="text" class="form-control" name="departureFrom" id="" class="" value="Hà Nội">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" name="arrivalTo" id="" class="" value="Đà Nẵng">
+                        </div>
+
+                    </div>
+
+                    <div class="date-and-quantity-container">
+                        <div class="date-container">
+                            <div class="">
+                                <label for="">Ngày khởi hành</label>
+                                <input type="date" class="form-control" placeholder="Tu ngay..." name="departDate"
+                                    id="depart-date">
+                            </div>
+                            <div class="mt-4 return-date-container">
+                                <label for="">Ngày về</label>
+                                <input type="date" class="form-control" placeholder="Den ngay..." name="returnDate"
+                                    id="return-date">
+
+                            </div>
+                        </div>
+                        <div class="quantity">
+                            <div class="quantity-item">
+                                <label for="">Số lượng người lớn (12 tuổi trở lên)</label>
+                                <input type="number" placeholder="" id="flight-adults-number" name="adults" min="1"
+                                    value="1">
+                            </div>
+                            <div class="quantity-item">
+                                <label for="">Số lượng trẻ em (2-11 tuổi)</label>
+                                <input type="number" placeholder="" id="flight-children-number" name="children" min="0"
+                                    value="0">
+                            </div>
+                            <div class="quantity-item">
+                                <label for="">Số lượng trẻ sơ sinh (dưới 2 tuổi)</label>
+                                <input type="number" placeholder="" id="flight-baby-number" name="baby" min="0"
+                                    value="0">
+                            </div>
+                            <div class="">
+                                <label for="">Hạng ghế</label>
+                                <select class="custom-select" name="classType" style="display: inline">
+                                    <option value="1">Phổ thông</option>
+                                    <option value="2">Phổ thông cao cấp</option>
+                                    <option value="3">Thương gia</option>
+                                    <option value="4">Hạng nhất</option>
+                                </select>
+                            </div>
+                            <div class="flight-message" style="min-height: 30px"></div>
+
+                        </div>
+                    </div>
+
+                    <input type="submit" value="TÌM CHUYẾN BAY" class="search-btn">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        // xử lý tổng số lượng hành khách đặt vé máy bay không quá 6
+        let flightAdultsNumber = document.querySelector('#flight-adults-number');
+        let flightChildrenNumber = document.querySelector('#flight-children-number');
+        let flightBabyNumber = document.querySelector('#flight-baby-number');
+        let prev1 = 1, prev2 = 0, prev3 = 0;
+        let checkNumberSmallerOrEqualSix = () => {
+            let sum = +flightAdultsNumber.value + +flightChildrenNumber.value + +flightBabyNumber.value;
+            console.log(sum);
+            if (sum > 6) {
+                flightAdultsNumber.value = prev1;
+                flightChildrenNumber.value = prev2;
+                flightBabyNumber.value = prev3;
+                document.querySelector('.flight-message').innerHTML = '<span style="color: red">Số lượng vé không vượt quá 6</span>'
+            }
+            else {
+                document.querySelector('.flight-message').innerHTML = ''
+            }
+            prev1 = flightAdultsNumber.value;
+            prev2 = flightChildrenNumber.value;
+            prev3 = flightBabyNumber.value;
+        }
+        flightAdultsNumber.onchange = flightBabyNumber.onchange = flightChildrenNumber.onchange = checkNumberSmallerOrEqualSix;
+    </script>
+    <script>
+
+        let hotelsFormLink = document.querySelector('.hotels-form-link');
+        let flightsFormLink = document.querySelector('.flights-form-link');
+        let hotelsFormElement = document.querySelector('.hotels-form');
+        let flightsFormElement = document.querySelector('.flights-form');
+        // Mặc định là hiện khách sạn
+        flightsFormElement.style.display = "none";
+        hotelsFormLink.onclick = function () {
+            flightsFormElement.style.display = "none";
+            hotelsFormElement.style.display = "block";
+            hotelsFormLink.style.borderBottom = "5px solid rgb(83, 146, 249)";
+            hotelsFormLink.style.color = "rgb(83, 146, 249)";
+            flightsFormLink.style.color = "black";
+            flightsFormLink.style.border = "none";
+        }
+        flightsFormLink.onclick = function () {
+            flightsFormElement.style.display = "block";
+            hotelsFormElement.style.display = "none";
+            flightsFormLink.style.borderBottom = "5px solid rgb(83, 146, 249)";
+            flightsFormLink.style.color = "rgb(83, 146, 249)";
+            hotelsFormLink.style.color = "black";
+            hotelsFormLink.style.border = "none";
+        }
+    </script>
+    <script>
+        flightTypeElement = document.querySelector('.flight-type');
+        returnDateElement = document.querySelector('.return-date-container');
+        returnDateElement.style.display = "none";
+
+        if (flightTypeElement.value == 2) {
+            returnDateElement.style.display = "block";
+
+        }
+        let flightTypeChangeFunction = () => {
+            let flightTypeElement = document.querySelector('.flight-type');
+            let returnDateElement = document.querySelector('.return-date-container');
+            if (flightTypeElement.value == 1) {
+                returnDateElement.style.display = "none";
+            }
+            else {
+                returnDateElement.style.display = "block";
+            }
+        }
+        flightTypeElement.onchange = flightTypeChangeFunction;
+        flightTypeElement.oninput = flightTypeChangeFunction;
+
+    </script>
+    <script>
+        let dateFromElement = document.querySelector('#date-from');
+        let dateToElement = document.querySelector('#date-to');
+        let date1Element = document.querySelector('#date1');
+        let date2Element = document.querySelector('#date2');
+
+        function handleDateToDateTime(date) {
+            let arr = date.split('-');
+            return arr[1] + '/' + arr[2] + '/' + arr[0];
+        }
+        dateFromElement.oninput = () => {
+            let val = dateFromElement.value;
+            date1Element.value = handleDateToDateTime(val);
+        }
+        dateToElement.oninput = () => {
+            let val = dateToElement.value;
+            date2Element.value = handleDateToDateTime(val);
+        }
+    </script>
+    <script>
+        let childagesElement = document.querySelector('.childages-container');
+        let quantityParent = document.querySelector('#quantity__person');
+        let quantityChild = document.querySelector('#quantity__child');
+
+        let rooms = document.querySelector('#quantity__room');
+
+        quantityChild.oninput = function () {
+            let html = '';
+            let len = +quantityChild.value;
+            for (let i = 0; i < len; i++) {
+                html += `<div class="form-group">
+                        <label for="">Tuổi của trẻ em ${i + 1}</label>
+                        <select class="form-control" name="childages${i + 1}">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option selected="selected">8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>`
+            }
+            childagesElement.innerHTML = html;
+        }
+
+        // quantityParent.oninput = function () {
+        //     rooms.value = quantityParent.value;
+        // }
+
+        rooms.oninput = function () {
+            rooms.value = Math.min(+rooms.value, 10);
+            if (quantityParent.value < rooms.value) {
+                quantityParent.value = rooms.value;
+            }
+        }
+
+        rooms.onchange = function () {
+            rooms.value = Math.min(+rooms.value, 10);
+            if (quantityParent.value < rooms.value) {
+                quantityParent.value = rooms.value;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
